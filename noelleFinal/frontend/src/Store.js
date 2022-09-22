@@ -17,7 +17,7 @@
 //     cart_items: localStorage.getItem("products")
 //       ? JSON.parse(localStorage.getItem("products"))
 //       : [],
-//   },
+//   }
 // };
 
 
