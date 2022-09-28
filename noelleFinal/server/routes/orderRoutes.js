@@ -9,9 +9,6 @@ orderRouter.post(
   "/order",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.product.name);
-
     const newOrder = new Order({
       orderItems: req.body.orderItems,
       shippingAddress: req.body.shippingAddress,
@@ -19,9 +16,20 @@ orderRouter.post(
       itemsPrice: req.body.itemsPrice,
       user: req.body.user._id,
     });
-    console.log(newOrder.user);
     const order = await newOrder.save();
     res.status(201).send({ message: "New Order Created", order });
+  })
+);
+
+orderRouter.get(
+  "/",
+  expressAsyncHandler(async (req, res) => {
+    const allOrders = await Order.find();
+    if (allOrders) {
+      res.status(200).send(allOrders);
+    } else {
+      res.status(404).send({ message: "no orders found" });
+    }
   })
 );
 orderRouter.get(
@@ -35,6 +43,19 @@ orderRouter.get(
 orderRouter.get(
   "/order/:id",
   isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(404).send({ message: "Order not Found" });
+    }
+  })
+);
+
+orderRouter.get(
+  "/details/:id",
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
@@ -65,6 +86,20 @@ orderRouter.put(
       res.send({ message: "Order Paid", order: updateOrder });
     } else {
       res.status(404).send({ message: "Order not found" });
+    }
+  })
+);
+
+orderRouter.delete(
+  "/delete/:id",
+  expressAsyncHandler(async (req, res) => {
+    try {
+      const deletedOrder = await Order.findByIdAndDelete({
+        _id: req.params.id,
+      });
+      res.status(200).send({ message: "order deleted" });
+    } catch (error) {
+      res.status(404).send({ message: "order not found" });
     }
   })
 );

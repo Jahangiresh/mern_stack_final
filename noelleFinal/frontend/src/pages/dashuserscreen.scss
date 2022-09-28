@@ -1,0 +1,41 @@
+.td__image {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__box {
+    background: #000;
+    height: 90px;
+    width: 90px;
+    overflow: hidden;
+    border-radius: 100%;
+    background-image: url(https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg);
+    background-position: center;
+    background-size: cover;
+    filter: brightness(80%);
+    &__img {
+      height: 100%;
+    }
+  }
+}
+.dashuserscreen {
+  &__container {
+    &__table {
+      &__tbody {
+        .btns__td {
+          padding: 0;
+          button {
+            width: 100%;
+            //   border: 0;
+            border-radius: 0;
+          }
+        }
+        img {
+          object-fit: contain;
+          height: 100px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

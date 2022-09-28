@@ -1,0 +1,36 @@
+.dashproductscreen {
+  &__container {
+    &__table {
+      td {
+        vertical-align: middle;
+      }
+
+      &__tbody {
+        .btns__td {
+          padding: 0;
+          button {
+            width: 100%;
+            //   border: 0;
+            border-radius: 0;
+          }
+        }
+        img {
+          object-fit: contain;
+          height: 100px;
+          width: 100%;
+        }
+      }
+    }
+    .add__products {
+      width: 100%;
+      padding: 23px 0;
+      border: none;
+      transition: 0.2s ease-in;
+      &:hover {
+        background-color: silver;
+        color: aliceblue;
+        font-weight: bold;
+      }
+    }
+  }
+}

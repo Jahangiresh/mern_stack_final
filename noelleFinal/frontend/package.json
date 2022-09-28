@@ -34,6 +34,7 @@
     "react-slick": "^0.29.0",
     "react-slide-fade-in": "^1.0.7",
     "react-toastify": "^9.0.8",
+    "react-uploader": "^1.8.2",
     "sass": "^1.54.4",
     "slick-carousel": "^1.8.1",
     "use-reducer-logger": "^1.0.2",

@@ -7,7 +7,12 @@ import { useReducer } from "react";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
-
+import { Uploader } from "uploader";
+import { UploadButton } from "react-uploader";
+import "./profilescreen.scss";
+const uploader = new Uploader({
+  apiKey: "free",
+});
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_REQUEST":
@@ -27,6 +32,8 @@ const ProfileScreen = () => {
   const [email, setEmail] = useState(userInfo.data.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [profilePic, setProfilePic] = useState(userInfo.data.profilePic);
+  console.log(profilePic);
 
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
@@ -38,6 +45,7 @@ const ProfileScreen = () => {
       const { data } = await axios.put(
         "/api/users/profile",
         {
+          profilePic,
           name,
           email,
           password,
@@ -58,7 +66,6 @@ const ProfileScreen = () => {
       toast.error(getError(err));
     }
   };
-
   return (
     <div>
       <div className="container">
@@ -67,6 +74,62 @@ const ProfileScreen = () => {
         </Helmet>
         <h1 className="my-3">User Profile</h1>
         <form onSubmit={submitHandler}>
+          <div
+            style={{
+              height: "153px",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            className="profile__picture__row row "
+          >
+            <div
+              style={{
+                borderRadius: "50%",
+                width: "150px",
+                height: "150px",
+                backgroundColor: "whitesmoke",
+                overflow: "hidden",
+                position: "relative",
+              }}
+              className="profile__picture__row__col p-0"
+            >
+              <UploadButton
+                style={{ bottom: "0" }}
+                uploader={uploader}
+                options={{ multi: true }}
+                onComplete={(files) => setProfilePic(files[0].fileUrl)}
+              >
+                {({ onClick }) => (
+                  <button
+                    className="pp__button"
+                    style={{
+                      position: "absolute",
+                      top: "70%",
+                      left: "50%",
+                      zIndex: "0",
+                      transform: "translate(-50%,-50%)",
+                      width: "100%",
+                      border: "none",
+                      backgroundColor: "#e3e3e385",
+                    }}
+                    onClick={onClick}
+                  >
+                    Upload a photo...
+                  </button>
+                )}
+              </UploadButton>
+              <img
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                src={profilePic}
+                alt=""
+              />
+            </div>
+          </div>
+
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control

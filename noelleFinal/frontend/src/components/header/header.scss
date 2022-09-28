@@ -32,7 +32,7 @@
   position: sticky;
   top: 0;
   transition: 0.2s ease-in-out;
-  z-index: 999999;
+  z-index: 999;
 
   &__container {
     width: 100%;
@@ -75,6 +75,7 @@
           padding: 0;
           margin: 0;
           font-size: 26px;
+
           // color: #8b6d4b;
           color: white;
 
@@ -87,6 +88,9 @@
           .sing__name {
             color: white;
             text-decoration: none;
+            font-size: 16px;
+          }
+          .admin__drop {
             font-size: 16px;
           }
           li {

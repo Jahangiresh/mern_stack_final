@@ -98,13 +98,32 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                     </li>
                   </NavDropdown>
                 ) : (
-                  <ul>
+                  <li>
+                    <Link className="sing__links " to="/signin">
+                      signin <FiLogIn />
+                    </Link>
+                  </li>
+                )}
+                {userinfo && userinfo.data.isAdmin && (
+                  <NavDropdown
+                    className="admin__drop "
+                    title="Admin"
+                    id="admin-nav-dropdown"
+                  >
                     <li>
-                      <Link className="sing__links" to="/signin">
-                        signin <FiLogIn />
-                      </Link>
+                      <Link to="/admin/dashboard">Dashboard</Link>
                     </li>
-                  </ul>
+                    <li>
+                      <Link to="/admin/productlist">Products</Link>
+                    </li>
+
+                    <li>
+                      <Link to="/admin/orderlist">Orders</Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/userlist">Users</Link>
+                    </li>
+                  </NavDropdown>
                 )}
 
                 <li className="cart m-0">

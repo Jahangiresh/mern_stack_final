@@ -21,7 +21,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import Auth from "./pages/Auth";
 import Login from "./pages/Login";
 import { useState, useEffect } from "react";
-import Dashboard from "./pages/Dashboard";
 import ProductScreen from "./components/ProductScreen";
 import AdressScreen from "./pages/AdressScreen";
 import Payment from "./pages/Payment";
@@ -29,8 +28,17 @@ import PlaceOrder from "./pages/PlaceOrder";
 import OrderScreen from "./pages/OrderScreen";
 import OrderHistoryScreen from "./pages/OrderHistoryScreen";
 import ProfileScreen from "./pages/ProfileScreen";
+import ProtectedRoute from "./components/ProtectedRoute";
+import DashboardScreen from "./pages/DashboardScreen";
 
-// import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
+import DashUserScreen from "./pages/DashUserScreen";
+import DashProductsScreen from "./pages/DashProductsScreen";
+import DashOrdersScreen from "./pages/DashOrdersScreen";
+import EditProductScreen from "./pages/EditProductScreen";
+import DashAddProducts from "./pages/DashAddProducts";
+import DashUserDetails from "./pages/DashUserDetails";
+import DashOrderDetails from "./pages/DashOrderDetails";
 
 function App() {
   if (localStorage.getItem("products") === null) {
@@ -95,7 +103,14 @@ function App() {
             path="/signin"
             element={<Login setuserinfo={setUserInfo} userinfo={userInfo} />}
           />
-          <Route path="/profile" element={<ProfileScreen />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfileScreen />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/signup"
             element={<Auth setuserinfo={setUserInfo} userinfo={userInfo} />}
@@ -111,11 +126,91 @@ function App() {
           <Route path="/payment" element={<Payment />} />
 
           <Route path="/placeorder" element={<PlaceOrder />} />
-          <Route path="/order/:id" element={<OrderScreen />} />
-          <Route path="/orderhistory" element={<OrderHistoryScreen />} />
+          <Route
+            path="/order/:id"
+            element={
+              <ProtectedRoute>
+                <OrderScreen />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orderhistory"
+            element={
+              <ProtectedRoute>
+                <OrderHistoryScreen />
+              </ProtectedRoute>
+            }
+          />
+          {/*admin routes*/}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRoute>
+                <DashboardScreen />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/userlist"
+            element={
+              <AdminRoute>
+                <DashUserScreen />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/productlist"
+            element={
+              <AdminRoute>
+                <DashProductsScreen />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/orderlist"
+            element={
+              <AdminRoute>
+                <DashOrdersScreen />
+              </AdminRoute>
+            }
+          />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/product/id/:id"
+            element={
+              <AdminRoute>
+                <EditProductScreen />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="admin/addproduct"
+            element={
+              <AdminRoute>
+                <DashAddProducts />
+              </AdminRoute>
+            }
+          />
+
+          <Route
+            path="/user/:id"
+            element={
+              <AdminRoute>
+                <DashUserDetails />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/order/details/:id"
+            element={
+              <AdminRoute>
+                <DashOrderDetails />
+              </AdminRoute>
+            }
+          />
         </Routes>
+
         <Footer />
       </Router>
     </div>

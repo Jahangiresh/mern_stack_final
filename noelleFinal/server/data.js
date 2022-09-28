@@ -137,6 +137,66 @@ const data = {
       instruction:
         "bu meshul 12 il qizdirildiqdan sonra uze cekilir, gece istifade ucundur uz derisinin rengini acir ve hetta sizi 321il qocaldaraq mumya edir, daha sonra mhsulun qabini goturub arxasini keserek dibinde qalan liquidi de coreyin ustune yaxib shin cayla yeyirsiniz bu zaman qandaki eritrositler cavanlashir ve bunu goren leykositler derhal onlarla birlikde olub dunyaya usaq getirmek isteyir ki bu da trombositlerin qisqancligina sebeb olur ve belece damarlarda qisqancliq zemninde qetl toredilir ki bununla da trombositler oz hucrelerine gonmderilir",
     },
+    {
+      // id: 6,
+      name: "new",
+      slug: "resurfacing-new",
+      desc: "Clamorous day and night cream invented by sir Elan Musc is a product of moon locals use it never regrets",
+      category: "lips",
+      rating: 3.5,
+      numReviews: 11,
+      countInStock: 18,
+      brand: "kiko Milan",
+
+      price: 30,
+      image:
+        "https://assets.website-files.com/5d89d502cbc3146c074657da/5d89d50fcbe90f25a34652e3_5d88989b08e53ee34bfd7122_spry5-p-500.png",
+      count: 1,
+      isTrending: true,
+      reRender: true,
+      instruction:
+        "bu meshul 12 il qizdirildiqdan sonra uze cekilir, gece istifade ucundur uz derisinin rengini acir ve hetta sizi 321il qocaldaraq mumya edir, daha sonra mhsulun qabini goturub arxasini keserek dibinde qalan liquidi de coreyin ustune yaxib shin cayla yeyirsiniz bu zaman qandaki eritrositler cavanlashir ve bunu goren leykositler derhal onlarla birlikde olub dunyaya usaq getirmek isteyir ki bu da trombositlerin qisqancligina sebeb olur ve belece damarlarda qisqancliq zemninde qetl toredilir ki bununla da trombositler oz hucrelerine gonmderilir",
+    },
+    {
+      // id: 6,
+      name: "new2",
+      slug: "salam",
+      desc: "Clamorous day and night cream invented by sir Elan Musc is a product of moon locals use it never regrets",
+      category: "lips",
+      rating: 3.5,
+      numReviews: 11,
+      countInStock: 18,
+      brand: "kiko Milan",
+
+      price: 30,
+      image:
+        "https://assets.website-files.com/5d89d502cbc3146c074657da/5d89d50fcbe90f25a34652e3_5d88989b08e53ee34bfd7122_spry5-p-500.png",
+      count: 1,
+      isTrending: true,
+      reRender: true,
+      instruction:
+        "bu meshul 12 il qizdirildiqdan sonra uze cekilir, gece istifade ucundur uz derisinin rengini acir ve hetta sizi 321il qocaldaraq mumya edir, daha sonra mhsulun qabini goturub arxasini keserek dibinde qalan liquidi de coreyin ustune yaxib shin cayla yeyirsiniz bu zaman qandaki eritrositler cavanlashir ve bunu goren leykositler derhal onlarla birlikde olub dunyaya usaq getirmek isteyir ki bu da trombositlerin qisqancligina sebeb olur ve belece damarlarda qisqancliq zemninde qetl toredilir ki bununla da trombositler oz hucrelerine gonmderilir",
+    },
+    {
+      // id: 6,
+      name: "new3",
+      slug: "lll-new",
+      desc: "Clamorous day and night cream invented by sir Elan Musc is a product of moon locals use it never regrets",
+      category: "lips",
+      rating: 3.5,
+      numReviews: 11,
+      countInStock: 18,
+      brand: "kiko Milan",
+
+      price: 30,
+      image:
+        "https://assets.website-files.com/5d89d502cbc3146c074657da/5d89d50fcbe90f25a34652e3_5d88989b08e53ee34bfd7122_spry5-p-500.png",
+      count: 1,
+      isTrending: true,
+      reRender: true,
+      instruction:
+        "bu meshul 12 il qizdirildiqdan sonra uze cekilir, gece istifade ucundur uz derisinin rengini acir ve hetta sizi 321il qocaldaraq mumya edir, daha sonra mhsulun qabini goturub arxasini keserek dibinde qalan liquidi de coreyin ustune yaxib shin cayla yeyirsiniz bu zaman qandaki eritrositler cavanlashir ve bunu goren leykositler derhal onlarla birlikde olub dunyaya usaq getirmek isteyir ki bu da trombositlerin qisqancligina sebeb olur ve belece damarlarda qisqancliq zemninde qetl toredilir ki bununla da trombositler oz hucrelerine gonmderilir",
+    }
   ],
 };
 

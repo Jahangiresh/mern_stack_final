@@ -1,0 +1,58 @@
+.dashuserdetails {
+  &__container {
+    &__imagebox {
+      justify-content: center;
+      &__image {
+        padding: 0;
+        height: 200px;
+        width: 200px;
+        overflow: hidden;
+        border-radius: 100%;
+        margin: 30px 0;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    &__statistics {
+      &__cols {
+        &__card {
+          padding: 40px 30px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+    &__message {
+      align-items: center;
+      &__col {
+        .text__msg {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.text__btn {
+  width: 100%;
+  padding: 30px 0;
+  background: rgba(172, 255, 47, 0.228);
+  border: 0;
+  transition: 2ms ease-in-out;
+  &:hover {
+    background: rgba(172, 255, 47, 0.34);
+  }
+}
+td {
+  vertical-align: middle;
+}
+.btns__td {
+  padding: 0;
+  button {
+    width: 100%;
+    //   border: 0;
+    border-radius: 0;
+  }
+}
