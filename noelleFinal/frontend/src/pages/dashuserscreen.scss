@@ -3,6 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #e3e3e3;
+
   &__box {
     background: #000;
     height: 90px;
@@ -12,6 +14,7 @@
     background-image: url(https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg);
     background-position: center;
     background-size: cover;
+
     filter: brightness(80%);
     &__img {
       height: 100%;
@@ -31,7 +34,7 @@
           }
         }
         img {
-          object-fit: contain;
+          object-fit: cover;
           height: 100px;
           width: 100%;
         }

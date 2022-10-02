@@ -53,7 +53,6 @@ export const ContactUs = () => {
       );
   };
 
-
   return (
     <div className="contactinputs">
       <Stack spacing={2} sx={{ width: "100%" }}>
@@ -67,20 +66,19 @@ export const ContactUs = () => {
           </Alert>
         </Snackbar>
       </Stack>
-      <form ref={form} onSubmit={sendEmail}>
-        <label>Name</label>
-        <input className="user__name" type="text" name="from_name" />
-        <label>Email</label>
-        <input type="email" name="from_email" />
-        <label>Message</label>
-        <textarea  name="message" />
+      <form className="form__inp" ref={form} onSubmit={sendEmail}>
         <input
-          variant="outlined"
-          onClick={handleClick}
-          className="button"
-          type="submit"
-          value="Send"
+          className="user__name"
+          type="text"
+          placeholder="name"
+          name="from_name"
         />
+        <input type="email" placeholder="email" name="from_email" />
+        <textarea placeholder="message" name="message" />
+
+        <button className="send__btn" onClick={handleClick} type="submit">
+          send
+        </button>
       </form>
     </div>
   );

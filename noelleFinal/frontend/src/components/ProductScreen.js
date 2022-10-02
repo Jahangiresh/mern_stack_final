@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import logger from "use-reducer-logger";
 import { useReducer } from "react";
 import axios from "axios";
@@ -11,10 +11,15 @@ import MessageBox from "./MessageBox";
 import { getError } from "../utils";
 import { useRef } from "react";
 
+import Box from "@mui/material/Box";
+import Stars from "@mui/material/Rating";
+
 import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
+import { MdExpandMore } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -30,6 +35,7 @@ const reducer = (state, action) => {
 };
 
 function ProductScreen({ setcount, setrerender }) {
+  const [value, setValue] = useState(2);
   const navigate = useNavigate();
 
   const params = useParams();
@@ -40,7 +46,9 @@ function ProductScreen({ setcount, setrerender }) {
     loading: true,
     error: "",
   });
+  const [comment, setComment] = useState();
 
+  console.log(product.comments);
   useEffect(() => {
     const getProduct = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -76,7 +84,46 @@ function ProductScreen({ setcount, setrerender }) {
 
     localStorage.setItem("products", JSON.stringify(products));
     setrerender((value) => !value);
+    // navigate(`/cartpage`);
+  };
+
+  const buyHandler = (product) => {
+    let products = JSON.parse(localStorage.getItem("products"));
+    let _id = product._id;
+    let existedProd = products.find((x) => x._id === _id);
+
+    if (product.countInStock < product.count) {
+      window.alert("sorry this product is out of stock");
+      return;
+    } else if (!existedProd) {
+      product.count = productCount.current.value;
+      products.push(product);
+    } else {
+      // products.splice(products.indexOf(existedProd), 1); --delete prod
+      existedProd.count = productCount.current.value;
+    }
+
+    setcount(products.length);
+
+    localStorage.setItem("products", JSON.stringify(products));
+    setrerender((value) => !value);
     navigate(`/cartpage`);
+  };
+  const commentHandler = async () => {
+    try {
+      await axios.put(`/api/products/comment/${slug}`, {
+        comments: comment,
+      });
+      toast.success("comment added");
+    } catch (error) {
+      toast.error(getError(error));
+    }
+  };
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
   return loading ? (
@@ -86,70 +133,169 @@ function ProductScreen({ setcount, setrerender }) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div className="singleproduct">
-      <div className="singleproduct__container container">
-        <div className="singleproduct__container__row row">
-          <div className="singleproduct__container__row__left col-12 col-lg-6 ">
-            <img src={product.image} alt="prod.jpg" />
+    <div className="product">
+      <div className="product__container container">
+        <div className="product__container__row row">
+          <div className="product__container__row__left col-6">
+            <div className="product__container__row__left__image">
+              <img src={product.image} alt="" />
+            </div>
           </div>
-          <div className="singleproduct__container__row__right col-12 col-lg-6">
-            <Helmet>
-              <title>{product.name}</title>
-            </Helmet>
-            <h1>{product.name}</h1>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={"v"}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>
-                  <p className="accordion__span">how to use</p>
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  <p>{product.instruction}</p>
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
-            <hr />
+          <div className="product__container__row__right col-6">
+            <div className="product__container__row__right__content">
+              <div className="product__container__row__right__content__title">
+                <h1>{product.name}</h1>
+                <span>{product.price} AZN</span>
+              </div>
+              <div className="product__container__row__right__content__counter">
+                <div className="product__container__row__right__content__counter__inputs">
+                  <span
+                    onClick={(e) => {
+                      e.target.nextSibling.value--;
+                    }}
+                  >
+                    -
+                  </span>
+                  <input
+                    ref={productCount}
+                    className="productCount"
+                    type="number"
+                    name=""
+                    defaultValue={1}
+                    id=""
+                  />{" "}
+                  <span
+                    onClick={(e) => {
+                      e.target.previousElementSibling.value++;
+                    }}
+                  >
+                    +
+                  </span>
+                </div>
 
-            <span>price: ${product.price} USD</span>
-            <hr />
-            <p>{product.desc}</p>
-            <hr />
-            <div className="singleproduct__container__row__right__inputs">
-              <select name="" id="select">
-                <option value="skin types">my skin</option>
-                <option value="skin types">skin </option>
-              </select>
-              <Rating rating={product.rating} numReviews={product.numReviews} />
-              <p className="mt-5 status__row">
-                Avaibility:
-                {product.countInStock > 0 ? (
-                  <span className="text-success status__span">avaibile</span>
-                ) : (
-                  <span className="text-danger status__span">not avaibile</span>
-                )}
-              </p>
-              <div className="singleproduct__container__row__right__inputs__cart">
-                <input
-                  ref={productCount}
-                  className="productCount"
-                  type="number"
-                  name=""
-                  defaultValue={1}
-                  id=""
-                />{" "}
                 <button
                   onClick={() => addToLocal(product)}
-                  className="singleproduct__container__row__right__inputs__cart__addBtn"
+                  className="product__container__row__right__content__counter__button"
                 >
                   Add to cart
                 </button>
               </div>
+              <button
+                onClick={() => buyHandler(product)}
+                className="buy__it__now"
+              >
+                buy it now
+              </button>
             </div>
+            <hr />
+            <div className="product__container__row__right__content__acc">
+              <Accordion
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
+              >
+                <AccordionSummary
+                  expandIcon={<MdExpandMore />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                >
+                  <Typography sx={{ color: "text.secondary" }}>
+                    Description
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{product.desc}</Typography>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                expanded={expanded === "panel2"}
+                onChange={handleChange("panel2")}
+              >
+                <AccordionSummary
+                  expandIcon={<MdExpandMore />}
+                  aria-controls="panel2bh-content"
+                  id="panel2bh-header"
+                >
+                  <Typography sx={{ color: "text.secondary" }}>
+                    substance
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{product.substance}</Typography>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                expanded={expanded === "panel3"}
+                onChange={handleChange("panel3")}
+              >
+                <AccordionSummary
+                  expandIcon={<MdExpandMore />}
+                  aria-controls="panel3bh-content"
+                  id="panel3bh-header"
+                >
+                  <Typography sx={{ color: "text.secondary" }}>
+                    Instruction
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{product.instruction}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+            <hr />
+            <div className="product__container__row__right__reviews">
+              <h2>
+                Costumer reviews:
+                <Rating
+                  rating={product.rating}
+                  numReviews={product.numReviews}
+                />
+              </h2>
+              {product.comments.length > 0 ? (
+                product.comments.map((p) => {
+                  return (
+                    <div className="review__comments">
+                      <div className="costumer__comment">
+                        <p>Jahangir Shirinov:</p>
+                        <span>12 may, 1992</span>
+                        <hr />
+
+                        {p}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <h2>no reviews</h2>
+              )}
+            </div>
+            <Accordion
+              className="comment__accordion"
+              expanded={expanded === "panel1"}
+              onChange={handleChange("panel1")}
+            >
+              <AccordionSummary
+                expandIcon={<MdExpandMore />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ color: "text.secondary" }}>
+                  <h2 className="h2__comment">Write a review</h2>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <input
+                  onChange={(e) => setComment(e.target.value)}
+                  className="comment__text w-100 py-3"
+                  type="text"
+                />
+                <button
+                  className="add__comment"
+                  onClick={() => commentHandler()}
+                >
+                  add comment
+                </button>
+              </AccordionDetails>
+            </Accordion>
           </div>
         </div>
       </div>

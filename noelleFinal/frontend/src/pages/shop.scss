@@ -1,11 +1,29 @@
 .shop {
+  .slick-arrow {
+    display: none !important;
+  }
   &__cover {
-    background-image: url(https://assets.website-files.com/5d89d4faecc118086c3813ec/5d8a11e4b4e4f75099ff947b_productcream.jpg);
+    background-image: url(https://images.unsplash.com/photo-1567722353464-dbe5a69b57c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+    height: 522px;
+    width: 100%;
+    background-size: cover;
+    background-position: top;
+  }
+  &__cover1 {
+    background-image: url(https://images.unsplash.com/photo-1556228721-e65f06ab45c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
     height: 522px;
     width: 100%;
     background-size: cover;
     background-position: center;
   }
+  &__cover2 {
+    background-image: url(https://images.unsplash.com/photo-1574441174782-3e27ad9447d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+    height: 522px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
   &__container {
     &__search {
       width: 100%;

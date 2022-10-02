@@ -4,6 +4,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { RiShoppingCartLine } from "react-icons/ri";
+import { BsBag } from "react-icons/bs";
+
 import { useState, useEffect } from "react";
 import "./cartmodal.scss";
 import { Link } from "react-router-dom";
@@ -56,7 +58,7 @@ export default function BasicModal({ count, setrerender, rerender }) {
   return (
     <div>
       <Button onClick={handleOpen}>
-        <RiShoppingCartLine className="cart__icon" />
+        <BsBag className="cart__icon" />
       </Button>
       <Modal
         open={open}

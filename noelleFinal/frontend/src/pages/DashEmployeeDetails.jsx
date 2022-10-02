@@ -22,11 +22,11 @@ function reducer(state, action) {
   }
 }
 
-const DashUserDetails = () => {
+const DashEmployeeDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const id = params.id;
-
+  const [role, setRole] = useState();
   const [{ loading, error, user }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
@@ -37,7 +37,7 @@ const DashUserDetails = () => {
     const getUser = async () => {
       try {
         dispatch({ type: "FETCH_REQUES" });
-        const resp = await axios.get(`/api/users/user/${id}`);
+        const resp = await axios.get(`/api/users/employee/${id}`);
 
         dispatch({ type: "FETCH_SUCCESS", payload: resp.data });
       } catch (err) {
@@ -49,16 +49,27 @@ const DashUserDetails = () => {
 
   const adminHandler = async () => {
     try {
-      await axios.put(`/api/users/user/${id}`, {
-        isAdmin: true,
+      await axios.put(`/api/users/employee/${id}`, {
+        // isAdmin: false,
       });
-      toast.success("admin added");
+      toast.success("admin removed");
       navigate(-1);
     } catch (error) {
       toast.error(getError(error));
     }
   };
 
+  const roleHandler = async () => {
+    try {
+      await axios.put(`/api/users/employee/role/${id}`, {
+        role: role,
+      });
+      toast.success("role added");
+      navigate(-1);
+    } catch (error) {
+      toast.error(getError(error));
+    }
+  };
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -102,6 +113,7 @@ const DashUserDetails = () => {
               <h3>{user.email}</h3>
             </div>
           </div>
+
           <div className="dashuserdetails__container__statistics__cols col-4">
             <div className="dashuserdetails__container__statistics__cols__card card">
               <h4>Registered at:</h4>
@@ -110,8 +122,25 @@ const DashUserDetails = () => {
           </div>
           <div className="dashuserdetails__container__statistics__cols col-4">
             <div className="dashuserdetails__container__statistics__cols__card card">
+              <h4>Add Role:</h4>
+
+              <div className="role d-flex">
+                <input
+                  onChange={(e) => {
+                    setRole(e.target.value);
+                  }}
+                  type="text"
+                />
+                <button onClick={() => roleHandler()} className="text__btn">
+                  add
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="dashuserdetails__container__statistics__cols col-4">
+            <div className="dashuserdetails__container__statistics__cols__card card">
               <button onClick={() => adminHandler()} className="text__btn">
-                give employee acces
+                remove employee acces
               </button>
             </div>
           </div>
@@ -136,4 +165,4 @@ const DashUserDetails = () => {
   );
 };
 
-export default DashUserDetails;
+export default DashEmployeeDetails;

@@ -7,7 +7,9 @@ import axios from "axios";
 import Features from "../components/Features";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slick from "react-slick";
 import TextField from "@mui/material/TextField";
 
 function valuetext(value) {
@@ -34,6 +36,7 @@ const Shop = ({ setcount, setrerender, rerender }) => {
   }, []);
 
   //filterleme bashladi
+
   const filterResult = (targetCategory) => {
     if (targetCategory === "all") {
       setProducts(filteredByCategory);
@@ -76,9 +79,48 @@ const Shop = ({ setcount, setrerender, rerender }) => {
     let uniqueCa = [...new Set(categories)];
     setUniqueCategories(uniqueCa);
   }, [categories]);
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+          autoplay: true,
+          autoplaySpeed: 2000,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+          autoplay: true,
+          autoplaySpeed: 2000,
+        },
+      },
+    ],
+  };
   return (
     <div className="shop">
-      <div className="shop__cover"></div>
+      <Slick {...settings}>
+        <div className="shop__cover"></div>
+        <div className="shop__cover1"></div>
+
+        <div className="shop__cover2"></div>
+      </Slick>
+
       <div className="shop__container container">
         <div className="shop__container__title row">
           <h2 data-aos="fade-right" className="discover">

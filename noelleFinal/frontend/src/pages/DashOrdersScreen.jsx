@@ -6,6 +6,8 @@ import Table from "react-bootstrap/esm/Table";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -52,7 +54,11 @@ const DashOrdersScreen = () => {
     }
   };
 
-  return (
+  return loading ? (
+    <LoadingBox></LoadingBox>
+  ) : error ? (
+    <MessageBox></MessageBox>
+  ) : (
     <div className="dashorderscreen">
       <div className="dashorderscreen__container container">
         <Table
@@ -74,7 +80,7 @@ const DashOrdersScreen = () => {
             {orders &&
               orders.map((order) => {
                 return (
-                  <tr>
+                  <tr key={order._id}>
                     <td>{order.createdAt.slice(0, 10)}</td>
                     <td>{order.itemsPrice}</td>
                     <td>

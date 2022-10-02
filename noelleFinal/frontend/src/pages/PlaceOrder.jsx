@@ -7,6 +7,8 @@ import LoadingBox from "../components/LoadingBox";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import Axios from "axios";
+import axios from "axios";
+import { useState } from "react";
 const reducer = (state, action) => {
   switch (action.type) {
     case "CREATE_REQUEST":
@@ -29,10 +31,6 @@ const PlaceOrder = () => {
   });
   //order
   let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  useEffect(() => {}, []);
-  // let myProds = localStorage.getItem("products");
-  // let myAddress = localStorage.getItem("address");
-  // let myPaymentMethod = localStorage.getItem("paymentMethod");
 
   const cart = {
     shipping_address: JSON.parse(localStorage.getItem("address")),
@@ -53,6 +51,8 @@ const PlaceOrder = () => {
   myProducts.map((myProduct) => {
     subtotal += myProduct.price * myProduct.count;
   });
+  const [totalorders, setTotalOrders] = useState();
+
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
@@ -70,12 +70,29 @@ const PlaceOrder = () => {
           },
         }
       );
+      setTotalOrders(totalorders + 1);
       dispatch({ type: "CREATE_SUCCESS" });
       localStorage.removeItem("products");
       navigate(`/order/${data.order._id}`);
     } catch (err) {
       dispatch({ type: "CREATE_FAIL" });
       toast.error(getError(err));
+    }
+    orderUpdateHandler();
+  };
+
+  const orderUpdateHandler = async () => {
+    try {
+      await axios.put(
+        "/api/users/updateprofileorder",
+        {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.data.token}` },
+        }
+      );
+      toast.success("added to order list");
+    } catch (error) {
+      toast.error(getError(error));
     }
   };
 

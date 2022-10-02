@@ -79,4 +79,19 @@ productRouter.put("/update/:id", async (req, res) => {
     res.status(404).send({ message: "product not found" });
   }
 });
+
+productRouter.put("/comment/:slug", async (req, res) => {
+  const prod = await Product.findOne({ slug: req.params.slug });
+
+  if (prod) {
+    prod.comments.push(req.body.comments);
+
+    const updatedProduct = await prod.save();
+    res.send({
+      comments: updatedProduct.comments,
+    });
+  } else {
+    res.status(404).send({ message: "product not found" });
+  }
+});
 export default productRouter;

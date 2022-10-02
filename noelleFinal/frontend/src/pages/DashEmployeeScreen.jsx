@@ -17,7 +17,7 @@ function reducer(state, action) {
         ...state,
         loading: false,
         error: "",
-        users: action.payload,
+        employees: action.payload,
       };
     case "FETCH_FAIL":
       return { error: action.payload, loading: false };
@@ -26,14 +26,14 @@ function reducer(state, action) {
   }
 }
 
-const DashUserScreen = () => {
+const DashEmployeeScreen = () => {
   const [deletedUser, setDeletedUser] = useState();
   // const [employees, setEmployees] = useState([]);
   const navigate = useNavigate();
-  const [{ loading, error, users }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, employees }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
-    users: [],
+    employees: [],
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const DashUserScreen = () => {
         dispatch({ type: "FETCH_REQUEST" });
         const resp = await axios.get("/api/users");
         resp.data.map((res) => {
-          if (!res.isAdmin) {
+          if (res.isAdmin) {
             usersOnly.push(res);
           }
         });
@@ -83,11 +83,12 @@ const DashUserScreen = () => {
               <th>Id</th>
               <th>Name</th>
               <th>email</th>
+              <th>Role</th>
             </tr>
           </thead>
           <tbody className="dashuserscreen__container__table__tbody">
-            {users &&
-              users.map((user) => {
+            {employees &&
+              employees.map((user) => {
                 return (
                   <tr key={user._id}>
                     <td className="td__image">
@@ -102,6 +103,8 @@ const DashUserScreen = () => {
                     <td>{user._id}</td>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
+                    <td>{user.role}</td>
+
                     <td className="btns__td">
                       <button
                         onClick={() => deleteHandler(user._id)}
@@ -112,7 +115,7 @@ const DashUserScreen = () => {
                       <br />
                       <button
                         onClick={() => {
-                          navigate(`/user/${user._id}`);
+                          navigate(`/employee/${user._id}`);
                         }}
                         className="btn danger"
                       >
@@ -129,4 +132,4 @@ const DashUserScreen = () => {
   );
 };
 
-export default DashUserScreen;
+export default DashEmployeeScreen;

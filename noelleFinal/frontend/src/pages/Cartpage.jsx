@@ -13,7 +13,6 @@ const Cartpage = ({ rerender, setrerender }) => {
   const [products, setProduct] = useState([]);
   // const [render, setRender] = useState(true);
 
-  
   let subtotal = 0;
   products.map((myProduct) => {
     subtotal += myProduct.price * myProduct.count;
@@ -63,7 +62,7 @@ const Cartpage = ({ rerender, setrerender }) => {
                   {myProducts &&
                     myProducts.map((myProduct) => {
                       return (
-                        <tr className="table__rows">
+                        <tr key={myProduct._id} className="table__rows">
                           <td className="table__cells">
                             <img src={myProduct.image} alt="" />
                           </td>

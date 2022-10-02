@@ -82,6 +82,7 @@ userRouter.put(
   "/user/:id",
   expressAsyncHandler(async (req, res) => {
     const user = await User.findById({ _id: req.params.id });
+
     if (user) {
       user.isAdmin = req.body.isAdmin || user.isAdmin;
 
@@ -94,13 +95,117 @@ userRouter.put(
     }
   })
 );
+
+userRouter.put(
+  "/employee/:id",
+  expressAsyncHandler(async (req, res) => {
+    const employee = await User.findById({ _id: req.params.id });
+
+    if (employee) {
+      employee.isAdmin = false;
+      // = req.body.isAdmin || employee.isAdmin;
+
+      const updateEmp = await employee.save();
+      res.send({
+        isAdmin: updateEmp.isAdmin,
+      });
+    } else {
+      res.status(404).send({ message: "this user cant be employee" });
+    }
+  })
+);
+
+userRouter.put(
+  "/employee/role/:id",
+  expressAsyncHandler(async (req, res) => {
+    const employee = await User.findById({ _id: req.params.id });
+
+    if (employee) {
+      employee.role = req.body.role || employee.role;
+
+      const updateEmp = await employee.save();
+      res.send({
+        role: updateEmp.role,
+      });
+    } else {
+      res.status(404).send({ message: "cant add role" });
+    }
+  })
+);
+
+userRouter.put(
+  "/updateprofilecart",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findById(req.body.user._id);
+    if (user) {
+      user.totalAddToCart++;
+
+      const updateUser = await user.save();
+      res.send({
+        totalAddToCart: updateUser.totalAddToCart,
+      });
+    } else {
+      res.status(404).send({ message: "not added to cart" });
+    }
+  })
+);
+
+userRouter.put(
+  "/updateprofileorder",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const userOrder = await User.findById(req.body.user._id);
+    if (userOrder) {
+      userOrder.totalOrders++;
+
+      const updateUserOrder = await userOrder.save();
+      res.send({
+        totalOrders: updateUserOrder.totalOrders,
+      });
+    } else {
+      res.status(404).send({ message: "order not added" });
+    }
+  })
+);
+
+userRouter.put(
+  "/updatetotalspend",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const userOrder = await User.findById(req.body.user._id);
+    if (userOrder) {
+      userOrder.totalSpend += req.body.totalSpend;
+
+      const updateUserSpend = await userSpend.save();
+      res.send({
+        totalSpend: updateUserSpend.totalSpend,
+      });
+    } else {
+      res.status(404).send({ message: "not updated" });
+    }
+  })
+);
+
 userRouter.get(
   "/user/:id",
   expressAsyncHandler(async (req, res) => {
-    const detailUser = await User.findOne({ _id: req.params.id });
+    const detailEmployee = await User.findOne({ _id: req.params.id });
 
-    if (detailUser) {
-      res.send(detailUser);
+    if (detailEmployee) {
+      res.send(detailEmployee);
+    } else {
+      res.status(404).send({ message: "users nots found" });
+    }
+  })
+);
+userRouter.get(
+  "/employee/:id",
+  expressAsyncHandler(async (req, res) => {
+    const detailEmployee = await User.findOne({ _id: req.params.id });
+
+    if (detailEmployee) {
+      res.send(detailEmployee);
     } else {
       res.status(404).send({ message: "users nots found" });
     }

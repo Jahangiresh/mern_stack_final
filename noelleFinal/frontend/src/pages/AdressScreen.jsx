@@ -19,11 +19,11 @@ const AdressScreen = () => {
   // const [postalCode, setPostalCode] = useState(localAddress.postalCode || "");
   // const [country, setCountry] = useState(localAddress.country || "");
 
-  const [fullName, setFullName] = useState();
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [postalCode, setPostalCode] = useState();
-  const [country, setCountry] = useState();
+  const [fullName, setFullName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
 
   const navigate = useNavigate();
 

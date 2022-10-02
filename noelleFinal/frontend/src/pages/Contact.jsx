@@ -9,7 +9,6 @@ import {
 } from "react-icons/ai";
 import { ContactUs } from "../components/ContactUs";
 const Contact = () => {
-
   return (
     <div className="contact">
       <div className="contact__img">
@@ -17,27 +16,30 @@ const Contact = () => {
           <div className="contact__container__row row">
             <div className="contact__container__row__left col-lg-6 col-12">
               <div className="contact__container__row__left__content">
-                <h2>Contact Us</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-                  perferendis mollitia deserunt?
-                </p>
+                <h1>Contact Us</h1>
+
                 <ContactUs />
+                <div className="contact__social">
+                  <span>
+                    <Link className="contact__social__links" to="instagram.com">
+                      <AiOutlineInstagram />
+                    </Link>
+                  </span>
+                  <span>
+                    <Link className="contact__social__links" to="facebook.com">
+                      <AiOutlineFacebook />
+                    </Link>
+                  </span>
+                  <span>
+                    <Link className="contact__social__links" to="twitter.com">
+                      <AiOutlineTwitter />
+                    </Link>
+                  </span>
+                </div>
               </div>
             </div>
             <div className="contact__container__row__right col-lg-6 col-12">
-              <div className="contact__logo">
-                <img
-                  src="https://assets.website-files.com/5d89d4faecc118086c3813ec/5d89d6a2b4e4f7878dfb7590_logowhite-8.png"
-                  alt="logo"
-                />
-              </div>
               <ul className="contact__ul">
-                <li>
-                  <p>Phone: 1 (888) 444-8866</p>
-                  <p>Fax: 1 (888) 666-8866</p>
-                  <p>Hours: M-F, 7 AM - 6 PM ET</p>
-                </li>
                 <li>
                   <p>Phone: 1 (888) 444-8866</p>
                   <p>Fax: 1 (888) 666-8866</p>
@@ -50,24 +52,6 @@ const Contact = () => {
                   ></iframe>
                 </li>
               </ul>
-
-              <div className="contact__social">
-                <span>
-                  <Link className="contact__social__links" to="instagram.com">
-                    <AiOutlineInstagram />
-                  </Link>
-                </span>
-                <span>
-                  <Link className="contact__social__links" to="facebook.com">
-                    <AiOutlineFacebook />
-                  </Link>
-                </span>
-                <span>
-                  <Link className="contact__social__links" to="twitter.com">
-                    <AiOutlineTwitter />
-                  </Link>
-                </span>
-              </div>
             </div>
           </div>
         </div>

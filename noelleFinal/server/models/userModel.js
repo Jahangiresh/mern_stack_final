@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     totalSpend: { type: Number, default: 0 },
     totalAddToCart: { type: Number, default: 0 },
     totalOrders: { type: Number, default: 0 },
+    role: { type: String, default: " " },
   },
   {
     timestamps: true,

@@ -1,84 +1,73 @@
-import React from "react";
-import "../components/menuslider.scss";
-import { useRef, useEffect } from "react";
-
+import React, { useState } from "react";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
-const Menuslider = ({ sliderproops }) => {
-  const sliderActive = useRef();
-  const menuImage = useRef();
+import "../components/menuslider.scss";
 
-  const menuCloser = () => {
-    sliderActive.current.classList.remove("slideractive");
-  };
-  useEffect(() => {
-    if (sliderproops) {
-      sliderActive.current.classList.add("slideractive");
-      setTimeout(() => {
-        menuImage.current.classList.add("right__active");
-      }, 500);
-    } else {
-      sliderActive.current.classList.remove("slideractive");
-      menuImage.current.classList.remove("right__active");
-    }
-  }, [sliderproops]);
+function OffCanvasExample({ name, ...props }) {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
-    <div ref={sliderActive} className="menuslider">
-      <div className="menuslider__container ">
-        <div className="menuslider__container__row">
-          <div className="menuslider__container__row__ul col-6">
-            <ul className="menuslider__ul">
-              <li onClick={menuCloser} className="li nav__li">
-                <Link className="links" to="/">
-                  <h1>Home page</h1>
-                </Link>
-                <p>Lorem ipsum dolor sit.</p>
-              </li>
-              <li onClick={menuCloser} className="li nav__li">
-                <Link className="links" to="/about">
-                  <h1>About us</h1>
-                </Link>
-                <p>Lorem ipsum dolor sit.</p>
-              </li>
-
-              <li onClick={menuCloser} className="nav__li">
-                <Link className="links" to="/shop">
-                  {" "}
-                  <h1>Shop</h1>
-                </Link>
-
-                <p>Lorem ipsum dolor sit.</p>
-              </li>
-              <li onClick={menuCloser} className="nav__li">
-                <Link className="links" to="/blog">
-                  {" "}
-                  <h1>Blog</h1>
-                </Link>
-
-                <p>Lorem ipsum dolor sit.</p>
-              </li>
-              <li onClick={menuCloser} className="nav__li">
-                <Link className="links" to="/contact">
-                  {" "}
-                  <h1>Contact</h1>
-                </Link>
-
-                <p>Lorem ipsum dolor sit.</p>
-              </li>
-
-              <p className="copywrites">
-                © Copyrights 2022 Jahangir Shirinov | All rights reserved
-              </p>
-            </ul>
-          </div>
-          <div
-            ref={menuImage}
-            className="menuslider__container__row__right col-6 "
-          ></div>
-        </div>
-      </div>
-    </div>
+    <>
+      <GiHamburgerMenu
+        style={{ color: "white", fontSize: "25px" }}
+        onClick={handleShow}
+        ClassName="hamburger__menu"
+      />
+      <Offcanvas
+        style={{ backgroundColor: "#000" }}
+        show={show}
+        onHide={handleClose}
+        {...props}
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>
+            <h5>stay with us</h5>
+          </Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <ul className="menu__ul">
+            <li className="menu__ul__li">
+              <Link className="menu__links" to="/">
+                home
+              </Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link className="menu__links" to="/about">
+                about us
+              </Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link className="menu__links" to="/shop">
+                shop
+              </Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link className="menu__links" to="/blog">
+                blog
+              </Link>
+            </li>
+            <li className="menu__ul__li">
+              <Link className="menu__links" to="/contact">
+                contact
+              </Link>
+            </li>
+          </ul>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
   );
-};
+}
 
-export default Menuslider;
+export default function Example() {
+  return (
+    <>
+      {["start"].map((placement, idx) => (
+        <OffCanvasExample key={idx} placement={placement} name={placement} />
+      ))}
+    </>
+  );
+}

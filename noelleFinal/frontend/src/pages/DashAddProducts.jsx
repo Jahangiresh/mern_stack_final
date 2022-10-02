@@ -25,14 +25,14 @@ const DashAddProducts = () => {
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
-  const [name, setName] = useState();
-  const [image, setImage] = useState();
-  const [brand, setBrand] = useState();
-  const [category, setCategory] = useState();
-  const [desc, setDesc] = useState();
-  const [price, setPrice] = useState();
-  const [countInStock, setCountInStock] = useState();
-  const [instruction, setInstruction] = useState();
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [desc, setDesc] = useState("");
+  const [price, setPrice] = useState("");
+  const [countInStock, setCountInStock] = useState("");
+  const [instruction, setInstruction] = useState("");
 
   const createHandler = async () => {
     navigate("/admin/productlist");

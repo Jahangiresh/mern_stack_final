@@ -65,7 +65,9 @@ const OrderHistoryScreen = () => {
       <Helmet>
         <title>Order History</title>
       </Helmet>
-      <h1>Order History1</h1>
+      <div className="h1__row row">
+        <h1 className="order__h1">Order History</h1>
+      </div>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -113,16 +115,15 @@ const OrderHistoryScreen = () => {
                     : "no"}
                 </td>
                 <td>
-                  <Button
+                  <button
                     className="order__btn"
                     type="button"
-                    // variant="dark"
                     onClick={() => {
                       navigate(`/order/${order._id}`);
                     }}
                   >
                     Details
-                  </Button>
+                  </button>
                 </td>
               </tr>
             ))}

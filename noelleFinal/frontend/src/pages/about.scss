@@ -1,13 +1,17 @@
 .about {
-  background-image: url(https://assets.website-files.com/5d89d4faecc118086c3813ec/5d8a11e6ecc118bb3a3c5641_paje-victoria-ohhEOp05h4g-unsplash.jpg);
+  background-image: url(https://images.unsplash.com/photo-1556760544-74068565f05c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
   background-position: center;
   background-size: cover;
-  width: auto;
+  background-repeat: no-repeat;
+
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   background-attachment: fixed;
 
   @media (min-width: 992px) {
+    background-position: left;
+    background-size: contain;
+    background-repeat: no-repeat;
     &__row {
       height: 100vh;
       .random__container {
@@ -38,10 +42,11 @@
     padding: 0 20px;
   }
   &__container {
-    background: #423d3f;
+    // background: #423d3f;
+    background-color: white;
   }
   &__container__slogan {
-    color: white;
+    color: black;
     padding: 100px 30px;
     h2 {
       font-size: 30px;
@@ -52,16 +57,19 @@
   }
 }
 .about2 {
-  background-image: url(https://assets.website-files.com/5d89d4faecc118086c3813ec/5d89d6a2b4e4f73ea1fb7595_product0.jpg);
-
+  background-image: url(https://images.unsplash.com/photo-1525904097878-94fb15835963?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
   background-position: center;
   background-size: cover;
-  width: auto;
+  background-repeat: no-repeat;
+
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   background-attachment: fixed;
 
   @media (min-width: 992px) {
+    background-position: right;
+    background-size: contain;
+
     &__row {
       height: 100vh;
       display: flex;
@@ -99,7 +107,8 @@
     padding: 0 20px;
   }
   &__container {
-    background: white;
+    // background: white;
+    background: #423d3f;
   }
   &__container__slogan {
     color: #000;
@@ -113,16 +122,16 @@
   }
 }
 .about3 {
-  background-image: url(https://assets.website-files.com/5d89d4faecc118086c3813ec/5d8b79a3243dbfa685954e93_joanna-kosinska-ToV0rS9nTYs-unsplash.jpg);
-  background-position: center;
+  background-image: url(https://images.unsplash.com/photo-1550159793-ac05f7255c88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+  background-repeat: no-repeat;
 
-  background-size: cover;
-  width: auto;
   background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
   background-attachment: fixed;
 
   @media (min-width: 992px) {
+    background-position: left;
+    background-size: contain;
     &__row {
       height: 100vh;
 
@@ -160,7 +169,8 @@
     background: #b9a79e;
   }
   &__container__slogan {
-    color: white;
+    color: black;
+
     padding: 100px 30px;
     h2 {
       font-size: 30px;

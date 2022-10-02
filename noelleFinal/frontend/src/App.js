@@ -39,6 +39,8 @@ import EditProductScreen from "./pages/EditProductScreen";
 import DashAddProducts from "./pages/DashAddProducts";
 import DashUserDetails from "./pages/DashUserDetails";
 import DashOrderDetails from "./pages/DashOrderDetails";
+import DashEmployeeScreen from "./pages/DashEmployeeScreen";
+import DashEmployeeDetails from "./pages/DashEmployeeDetails";
 
 function App() {
   if (localStorage.getItem("products") === null) {
@@ -160,6 +162,14 @@ function App() {
             }
           />
           <Route
+            path="/admin/employeelist"
+            element={
+              <AdminRoute>
+                <DashEmployeeScreen />
+              </AdminRoute>
+            }
+          />
+          <Route
             path="/admin/productlist"
             element={
               <AdminRoute>
@@ -201,6 +211,15 @@ function App() {
               </AdminRoute>
             }
           />
+          <Route
+            path="/employee/:id"
+            element={
+              <AdminRoute>
+                <DashEmployeeDetails />
+              </AdminRoute>
+            }
+          />
+
           <Route
             path="/order/details/:id"
             element={

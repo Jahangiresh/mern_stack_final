@@ -86,18 +86,12 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer__container__row__col col-lg-3 col-12">
-            <h3>Sign up now</h3>
+            <h3>Get connected now</h3>
             <p>
               Add more beauty to your messages! Join us to be the first to know
               about exclusive offers and exciting news.
             </p>
-            {/* <input
-              className="footeremail"
-              type="email"
-              placeholder="enter your email"
-            />{" "}
-            <br />
-            <button>Submit</button> */}
+
             <FooterContact />
           </div>
         </div>

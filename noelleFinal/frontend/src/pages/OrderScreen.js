@@ -77,6 +77,7 @@ const OrderScreen = () => {
           }
         );
         dispatch({ type: "PAY_SUCCESS", payload: data });
+        spendUpdateHandler();
         toast.success("Order is Paid");
       } catch (err) {
         dispatch({ type: "PAY_FAIL", payload: getError(err) });
@@ -91,6 +92,23 @@ const OrderScreen = () => {
 
   // const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [userInfo, setUserInfo] = useState([]);
+
+  const spendUpdateHandler = async () => {
+    try {
+      await axios.put(
+        "/api/users/updatetotalspend",
+        {
+          totalSpend: order.itemsPrice,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.data.token}` },
+        }
+      );
+      toast.success("added to order list");
+    } catch (error) {
+      toast.error(getError(error));
+    }
+  };
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));

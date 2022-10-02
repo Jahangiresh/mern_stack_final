@@ -86,7 +86,7 @@ const DashProductsScreen = () => {
             {products &&
               products.map((product) => {
                 return (
-                  <tr>
+                  <tr key={product._id}>
                     <td>
                       <img src={product.image} alt="" />
                     </td>

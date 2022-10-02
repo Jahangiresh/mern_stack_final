@@ -1,8 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import "./product.scss";
 import { useNavigate } from "react-router-dom";
 import Rating from "./Rating";
+import axios from "axios";
+import { getError } from "../utils";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 // import { useState } from "react";
 
 const Product = ({
@@ -35,6 +39,23 @@ const Product = ({
     setrerender((value) => !value);
     setcount(products.length);
     localStorage.setItem("products", JSON.stringify(products));
+    cartUpdateHandler();
+  };
+  let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  useEffect(() => {}, []);
+  const cartUpdateHandler = async () => {
+    try {
+      await axios.put(
+        "/api/users/updateprofilecart",
+        {},
+        {
+          headers: { Authorization: `Bearer ${userInfo.data.token}` },
+        }
+      );
+      toast.success("added to cart");
+    } catch (error) {
+      toast.error(getError(error));
+    }
   };
 
   return (
@@ -45,6 +66,22 @@ const Product = ({
           .map((prod) => {
             return (
               <div key={prod._id} className="product col-lg-4 col-md-6 col-12">
+                <div
+                  onClick={() => {
+                    navigate(`/product/${prod.slug}`);
+                  }}
+                  className="product__content"
+                >
+                  <div className="product__content__image">
+                    <img src={prod.image} alt="" />
+                  </div>
+                  <div className="product__content__title">
+                    <span className="title__span">{prod.name}</span>
+                    <br />
+                    <span className="money__span">{prod.price}AZN</span>
+                  </div>
+                </div>
+
                 {prod.countInStock === 0 ? (
                   <button className="add__cart">out of stock</button>
                 ) : (
@@ -55,25 +92,6 @@ const Product = ({
                     add to card
                   </button>
                 )}
-                {/* <button onClick={() => addToLocal(prod)} className="add__cart">
-                  add to card
-                </button> */}
-                <button
-                  onClick={() => {
-                    navigate(`/product/${prod.slug}`);
-                  }}
-                  className="view__product"
-                >
-                  view product
-                </button>
-                <div className="product__image">
-                  <img src={prod.image} alt="" />
-                </div>
-                <div className="product__title">
-                  <h3>{prod.name} </h3>
-                  <span>{prod.price}</span>
-                  <Rating rating={prod.rating} numReviews={prod.numReviews} />
-                </div>
               </div>
             );
           })}

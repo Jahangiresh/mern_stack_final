@@ -4,3 +4,93 @@
     background-color: white !important;
   }
 }
+.profile__container {
+  &__title {
+    text-align: center;
+    margin: 30px 0;
+    .span__account {
+      font-size: 12px;
+      position: relative;
+      cursor: pointer;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 1px;
+        background: #000;
+      }
+    }
+  }
+}
+.h1__account {
+  display: inline;
+  padding: 10px 0;
+  font-size: 25px;
+  font-weight: 600;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #000;
+  }
+}
+.edit__profile {
+  margin-top: 70px;
+}
+.profile__picture__row__col {
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOpNfV6KXugQxH1NfszTYvKqL6N9LsRD_zMgoPz_gzmHjnNfY-Zh2wqdqAwLyfVC8ZFQU&usqp=CAU);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(40%);
+}
+.my__name {
+  text-align: center;
+}
+.edit__profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__center {
+  }
+}
+.field__inp {
+  width: 500px;
+  border: 1px solid #bfbfbf;
+  background: #ffffff;
+  padding: 1em 1.7em;
+  border-radius: 0;
+  margin-bottom: 20px;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+}
+.register__btn {
+  width: 100%;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-size: 13px !important;
+  letter-spacing: 0.13em;
+  border-radius: 0 !important;
+  display: inline-block;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  height: auto;
+  width: auto;
+  padding: 18px 30px;
+  line-height: 1.25em;
+  vertical-align: top;
+  font-weight: 400;
+  transition: opacity 0.3s, color 0.3s, background-color 0.3s, border-color 0.3s,
+    transform 0.3s;
+  &:hover {
+    background: white;
+    color: black;
+  }
+}

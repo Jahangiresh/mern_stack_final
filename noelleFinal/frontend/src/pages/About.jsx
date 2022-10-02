@@ -16,11 +16,7 @@ const About = () => {
                   A hello biologist wrote a unique and visionary page in the
                   history of skin cares
                 </h2>
-                {/* 
-                <select name="language" onChange={onChange}>
-                  <option value="en">english</option>
-                  <option value="az">azerbaijan</option>
-                </select> */}
+
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Suspendisse varius enim in eros elementum tristique. Duis
@@ -40,10 +36,7 @@ const About = () => {
           <div className="about2__row__col col-lg-6 col-12 p-0">
             <div className="about2__container random__container">
               <div className="about2__container__slogan">
-                <h2>
-                  A biologist wrote a unique and visionary page in the history
-                  of skin care
-                </h2>
+                <h2>Natural solutions playing big</h2>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Suspendisse varius enim in eros elementum tristique. Duis
@@ -63,15 +56,12 @@ const About = () => {
           <div className="about3__row__col col-lg-6 col-12 p-0">
             <div className="about3__container random__container">
               <div className="about3__container__slogan">
-                <h2>
-                  A biologist wrote a unique and visionary page in the history
-                  of skin care
-                </h2>
+                <h2>Soft skin in sottile bottles</h2>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Suspendisse varius enim in eros elementum tristique. Duis
                   cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                  commodo diam libero vitae erat.{" "}
+                  commodo diam libero vitae erat.
                 </p>
               </div>
             </div>

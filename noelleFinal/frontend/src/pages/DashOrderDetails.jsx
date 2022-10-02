@@ -7,6 +7,7 @@ import { getError } from "../utils";
 import "./dashorderdetails.scss";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import { toast } from "react-toastify";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -27,7 +28,7 @@ const DashOrderDetails = () => {
     loading: true,
     error: "",
   });
-
+  // const userInfo
   const params = useParams();
   const { id } = params;
 
@@ -44,6 +45,22 @@ const DashOrderDetails = () => {
     getOrder();
   }, [id]);
 
+  const updateHandler = async () => {
+    console.log(id);
+    try {
+      await axios.put(
+        `/api/orders/update/${id}`,
+        {
+          // isDelivered: true,
+        }
+        // {
+        //   headers: { Authorization: `Bearer ${userInfo.data.token}` },
+        // }
+      );
+    } catch (error) {
+      toast.error(getError(error));
+    }
+  };
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -62,11 +79,11 @@ const DashOrderDetails = () => {
                 bordered
                 hover
               >
-                {order.orderItems &&
-                  order.orderItems.map((item) => {
-                    return (
-                      <tbody className="dashorderdetails__container__products__col__card__table__tbody">
-                        <tr>
+                <tbody className="dashorderdetails__container__products__col__card__table__tbody">
+                  {order.orderItems &&
+                    order.orderItems.map((item) => {
+                      return (
+                        <tr key={item._id}>
                           <td>
                             <div className="td__image">
                               <img src={item.image} alt="" />
@@ -75,16 +92,10 @@ const DashOrderDetails = () => {
                           <td>{item.name}</td>
                           <td>{item.price}</td>
                           <td>{item.count}</td>
-
-                          <td className="btns__td">
-                            <button className="btn danger">delete</button>
-                            <br />
-                            <button className="btn danger">edit</button>
-                          </td>
                         </tr>
-                      </tbody>
-                    );
-                  })}
+                      );
+                    })}
+                </tbody>
               </Table>
             </div>
           </div>
@@ -100,13 +111,38 @@ const DashOrderDetails = () => {
               >
                 <tbody className="dashorderdetails__container__products__col__card__table__tbody">
                   <tr>
-                    <td>city:{order.shippingAddress.city}</td>
+                    <td>full name:</td>
+
+                    <td>{order.shippingAddress.fullName}</td>
+                  </tr>
+                  <tr>
+                    <td>country:</td>
+
+                    <td>{order.shippingAddress.country}</td>
+                  </tr>
+                  <tr>
+                    <td>city:</td>
+
+                    <td>{order.shippingAddress.city}</td>
+                  </tr>
+                  <tr>
+                    <td>address:</td>
+
+                    <td>{order.shippingAddress.address}</td>
+                  </tr>
+                  <tr>
+                    <td>postal code:</td>
+
+                    <td>{order.shippingAddress.postalCode}</td>
                   </tr>
                 </tbody>
               </Table>
             </div>
           </div>
         </div>
+        <button onClick={() => updateHandler()} className="deliver__btn">
+          start delivering proccess...
+        </button>
       </div>
     </div>
   );

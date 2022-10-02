@@ -8,8 +8,11 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
 import { Uploader } from "uploader";
+import { useNavigate } from "react-router-dom";
 import { UploadButton } from "react-uploader";
 import "./profilescreen.scss";
+import LoadingBox from "../components/LoadingBox";
+
 const uploader = new Uploader({
   apiKey: "free",
 });
@@ -33,7 +36,6 @@ const ProfileScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [profilePic, setProfilePic] = useState(userInfo.data.profilePic);
-  console.log(profilePic);
 
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
@@ -66,13 +68,18 @@ const ProfileScreen = () => {
       toast.error(getError(err));
     }
   };
-  return (
+  return loadingUpdate ? (
+    <LoadingBox></LoadingBox>
+  ) : (
     <div>
-      <div className="container">
+      <div className="container profile__container">
         <Helmet>
           <title>User Profile</title>
         </Helmet>
-        <h1 className="my-3">User Profile</h1>
+        <div className="profile__container__title">
+          {/* <span className="span__account">return to store</span> <br /> */}
+          <h1 className="my-3 h1__account">My Account</h1>
+        </div>
         <form onSubmit={submitHandler}>
           <div
             style={{
@@ -129,42 +136,50 @@ const ProfileScreen = () => {
               />
             </div>
           </div>
+          <div className="my__name">
+            <h1 className="h1__account h1__name">{userInfo.data.name}</h1>
+          </div>
+          <div className="edit__profile">
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                className="field__inp"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                className="field__inp"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="name">
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
-          <div className="mb-3">
-            <Button type="submit">Update</Button>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                className="field__inp"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="passwordconfirm">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                className="field__inp"
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </Form.Group>
+            <button className="register__btn" type="submit">
+              Update
+            </button>
           </div>
         </form>
       </div>

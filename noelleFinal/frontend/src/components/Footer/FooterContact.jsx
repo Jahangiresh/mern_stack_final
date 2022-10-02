@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import "../contactinputs.scss";
 import "./footercontact.scss";
-
+import { CgArrowLongRight } from "react-icons/cg";
 //toaster
 // import * as React from 'react';
 import Stack from "@mui/material/Stack";
@@ -53,9 +53,9 @@ export const FooterContact = () => {
         }
       );
   };
-  const messageHandler = (e) => {
-    console.log(e.target.value);
-  };
+  // const messageHandler = (e) => {
+  //   console.log(e.target.value);
+  // };
 
   return (
     <div className="contactinputs">
@@ -66,7 +66,7 @@ export const FooterContact = () => {
             severity="success"
             sx={{ width: "100%" }}
           >
-            This is a success message!
+            Message sent! Stay Connected!
           </Alert>
         </Snackbar>
       </Stack>
@@ -77,12 +77,10 @@ export const FooterContact = () => {
           type="email"
           name="from_email"
         />
-        <input
-          variant="outlined"
+        <CgArrowLongRight
           onClick={handleClick}
-          className="button submit__btn"
           type="submit"
-          value="Submit"
+          className="submit__btn"
         />
       </form>
     </div>

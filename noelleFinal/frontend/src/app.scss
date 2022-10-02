@@ -6,3 +6,15 @@
   //   font-family: 'Playfair Display', serif;
   // height: 500vh;
 }
+
+body::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #e3e3e3; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: black; /* color of the scroll thumb */
+}

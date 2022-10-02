@@ -15,6 +15,11 @@ const productSchema = new mongoose.Schema(
     count: { type: Number, required: true, default: 1 },
     instruction: { type: String, required: true },
     rating: { type: Number },
+    comments: [
+      {
+        type: String,
+      },
+    ],
     reRender: { type: Boolean },
   },
   {
