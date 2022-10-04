@@ -9,6 +9,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import "./editproduct.scss";
+
+import * as React from "react";
+import Switch from "@mui/material/Switch";
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -25,7 +29,11 @@ const reducer = (state, action) => {
 function EditProductScreen() {
   const params = useParams();
   const { id } = params;
+  const [checked, setChecked] = React.useState();
 
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
     loading: true,
@@ -37,7 +45,9 @@ function EditProductScreen() {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const resp = await axios.get(`/api/products/id/${id}`);
+
         dispatch({ type: "FETCH_SUCCESS", payload: resp.data });
+        setChecked(resp.data.isTrending);
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
@@ -55,6 +65,7 @@ function EditProductScreen() {
         name,
         countInStock,
         price,
+        isTrending: checked,
       });
       dispatch({
         type: "UPDATE_SUCCESS",
@@ -78,13 +89,14 @@ function EditProductScreen() {
   ) : (
     <div className="editproductscreen">
       <div className="editproductscreen__container container">
-        <form onSubmit={submitHandler}>
+        <form className=" upd__inp" onSubmit={submitHandler}>
           <div className="editproductscreen__container__imageBox">
             <img src={product.image} alt="" />
           </div>
-          <Form.Group className="mb-3" controlId="name">
+          <Form.Group className="mb-3 upd__inp " controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
+              className="field__inp__update"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -93,6 +105,7 @@ function EditProductScreen() {
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Quantity</Form.Label>
             <Form.Control
+              className="field__inp__update"
               value={countInStock}
               onChange={(e) => setCountInStock(e.target.value)}
               required
@@ -102,14 +115,27 @@ function EditProductScreen() {
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Price</Form.Label>
             <Form.Control
+              className="field__inp__update"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
           </Form.Group>
-
+          <span>
+            make{" "}
+            <abbr title="this section allows product to be in main page among all new trending products">
+              trend
+            </abbr>
+          </span>
+          <Switch
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ "aria-label": "controlled" }}
+          />
           <div className="mb-3">
-            <Button type="submit">Update</Button>
+            <button className="upd__btn" type="submit">
+              Update
+            </button>
           </div>
         </form>
       </div>

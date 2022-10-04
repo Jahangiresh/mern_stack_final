@@ -25,9 +25,19 @@
           // display: none;
         }
         .table__rows {
-          .cell__span__total {
+          td {
             @media (max-width: 430px) {
-              display: none;
+              display: flex;
+              justify-content: center;
+              width: 100%;
+            }
+          }
+
+          .cell__span {
+            @media (max-width: 430px) {
+              display: flex;
+              justify-content: center;
+              width: 100%;
             }
           }
           .table__cells {

@@ -24,8 +24,6 @@ const Shop = ({ setcount, setrerender, rerender }) => {
 
   const [filteredByCategory, setFilteredByCategory] = useState();
 
-  // const apiEndPoint = "http://localhost:3000/products";
-
   useEffect(() => {
     const getProduct = async () => {
       const resp = await axios.get("/api/products");
@@ -34,8 +32,6 @@ const Shop = ({ setcount, setrerender, rerender }) => {
     };
     getProduct();
   }, []);
-
-  //filterleme bashladi
 
   const filterResult = (targetCategory) => {
     if (targetCategory === "all") {
@@ -47,8 +43,6 @@ const Shop = ({ setcount, setrerender, rerender }) => {
       setProducts(result);
     }
   };
-
-  //filterleme bitdi
 
   //RANGE  SLIDER bashladi
 

@@ -41,21 +41,6 @@ const Footer = () => {
             <h3>Support</h3>
             <ul>
               <li>
-                <Link to="/about" className="footerlinks">
-                  licensing
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="footerlinks">
-                  privacy
-                </Link>
-              </li>
-              <li>
-                <Link to="/shop" className="footerlinks">
-                  terms & conditions
-                </Link>
-              </li>
-              <li>
                 <Link to="/contact" className="footerlinks">
                   contact us
                 </Link>

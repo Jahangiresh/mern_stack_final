@@ -15,7 +15,7 @@ function OffCanvasExample({ name, ...props }) {
       <GiHamburgerMenu
         style={{ color: "white", fontSize: "25px" }}
         onClick={handleShow}
-        ClassName="hamburger__menu"
+        className="hamburger__menu"
       />
       <Offcanvas
         style={{ backgroundColor: "#000" }}

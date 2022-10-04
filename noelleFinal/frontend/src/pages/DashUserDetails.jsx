@@ -125,6 +125,7 @@ const DashUserDetails = () => {
               id=""
               cols="30"
               rows="10"
+              placeholder="your message here"
             ></textarea>
           </div>
           <div className="dashuserdetails__container__message__col col-6">

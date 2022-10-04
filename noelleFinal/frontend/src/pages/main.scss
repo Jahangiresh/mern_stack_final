@@ -87,7 +87,9 @@
     width: 100%;
     position: relative;
     overflow: hidden;
+
     .myVideo {
+      filter: hue-rotate(70deg);
       position: absolute;
       left: 0;
       z-index: -1;

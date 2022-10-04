@@ -33,7 +33,7 @@ const Auth = ({ setuserinfo, userinfo }) => {
         password,
       });
       setuserinfo(localStorage.setItem("userInfo", JSON.stringify({ data })));
-      navigate(redirect || "/");
+      window.location.href = redirect || "/";
     } catch (err) {
       toast.error(getError(err));
     }

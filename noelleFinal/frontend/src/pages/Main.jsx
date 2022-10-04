@@ -43,8 +43,6 @@ const Main = ({ setcount, setrerender }) => {
   const [userInfo, setUserInfo] = useState(
     JSON.parse(localStorage.getItem("userInfo"))
   );
-  // const [products, setProducts] = useState([]);
-  // const apiEndPoint = "http://localhost:3000/products";
 
   useEffect(() => {
     const getProduct = async () => {
@@ -61,18 +59,6 @@ const Main = ({ setcount, setrerender }) => {
   }, []);
 
   const cover = useRef();
-
-  //ERROR NAVIGATION ZAMAN--|v
-
-  // useEffect(() => {
-  //   document.addEventListener("scroll", () => {
-  //     if (window.scrollY > 100) {
-  //       cover.current.classList.add("cover__scrolled");
-  //     } else {
-  //       cover.current.classList.remove("cover__scrolled");
-  //     }
-  //   });
-  // }, []);
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
@@ -123,6 +109,7 @@ const Main = ({ setcount, setrerender }) => {
       },
     ],
   };
+
   return (
     <>
       <Helmet>
@@ -183,10 +170,6 @@ const Main = ({ setcount, setrerender }) => {
                               <span className="title__span">{p.name}</span>
                               <br />
                               <span className="money__span">{p.price}AZN</span>
-                              <Rating
-                                rating={p.rating}
-                                numReviews={p.numReviews}
-                              />
                             </div>
                           </div>
 
@@ -226,14 +209,18 @@ const Main = ({ setcount, setrerender }) => {
           </div>
           <div className="main__container__posts row">
             <div className="post__1 col-lg-6 col-md-6 col-12 post">
-              <h2>NATURAL SOLUTIONS.SOFT SKIN</h2>
+              <h2 onClick={() => navigate("/blog")}>
+                NATURAL SOLUTIONS.SOFT SKIN
+              </h2>
               <img
                 src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                 alt=""
               />
             </div>
             <div className="post__2 col-lg-6 col-md-6 col-12 post">
-              <h2>CLASSIC.RELAX & ATTRACT</h2>
+              <h2 onClick={() => navigate("/about")}>
+                CLASSIC.RELAX & ATTRACT
+              </h2>
               <img
                 src="https://images.unsplash.com/photo-1599022509786-23794c1b68c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1114&q=80"
                 alt=""

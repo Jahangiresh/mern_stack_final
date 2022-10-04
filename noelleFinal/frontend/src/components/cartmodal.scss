@@ -75,13 +75,15 @@
       object-fit: contain;
       object-position: center;
       height: 100%;
-      padding: 0 40px;
+      // padding: 0 40px;
       @media (max-width: 992px) {
         display: none;
       }
       img {
-        height: 100%;
         width: 100%;
+        object-position: center;
+        object-fit: cover;
+        height: 100%;
       }
     }
   }
@@ -91,10 +93,12 @@
   display: flex;
   justify-content: center;
   &__logo {
-    width: 170px;
+    height: 60px;
     padding: 0;
+    display: flex;
+    justify-content: center;
     img {
-      width: 100%;
+      height: 100%;
     }
   }
 }
@@ -111,21 +115,27 @@
   margin: 0 !important;
   position: relative;
 }
+
 .cartmodal__link {
-  position: absolute;
-  top: 0;
-  right: 0;
   width: 100%;
-  padding: 20px 80px;
-  flex: 0 auto;
-  background-color: #8b6d4b;
-  transition: transform 400ms ease-in-out;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 200;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-  height: 100%;
   text-transform: uppercase;
+  font-size: 13px !important;
+  letter-spacing: 0.13em;
+  border-radius: 0 !important;
+  display: inline-block;
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid #000000;
+  height: auto;
+  padding: 18px 30px;
+  line-height: 1.25em;
+  vertical-align: top;
+  font-weight: 400;
+  transition: opacity 0.3s, color 0.3s, background-color 0.3s, border-color 0.3s,
+    transform 0.3s;
+  text-align: center;
+  &:hover {
+    background: white;
+    color: black;
+  }
 }

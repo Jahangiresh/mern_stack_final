@@ -3,6 +3,9 @@ import { useReducer } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+
 import "./dashboardscreen.scss";
 function reducer(state, action) {
   switch (action.type) {
@@ -66,6 +69,7 @@ const DashboardScreen = () => {
       try {
         dispatch({ type: "fetch_req" });
         const resp = await axios.get("/api/users");
+        console.log(resp.data);
         const spend = resp.data.map((user) => {
           return user.totalSpend;
         });
@@ -102,7 +106,11 @@ const DashboardScreen = () => {
     getUser();
   }, []);
 
-  return (
+  return loading ? (
+    <LoadingBox></LoadingBox>
+  ) : error ? (
+    <MessageBox></MessageBox>
+  ) : (
     <div className="dashboard">
       <div className="dashboard__container container">
         <div className="dashboard__container__row row">

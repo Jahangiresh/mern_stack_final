@@ -66,7 +66,7 @@ const DashProductsScreen = () => {
     <MessageBox>{error}</MessageBox>
   ) : (
     <div className="dashproductscreen">
-      <div className="dashproductscreen__container container">
+      <div className="dashproductscreen__container ">
         <Table
           className="dashproductscreen__container__table"
           striped
@@ -87,27 +87,26 @@ const DashProductsScreen = () => {
               products.map((product) => {
                 return (
                   <tr key={product._id}>
-                    <td>
+                    <td className="img__td">
                       <img src={product.image} alt="" />
                     </td>
 
                     <td>{product._id}</td>
                     <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{product.countInStock}</td>
+                    <td>{product.price} AZN</td>
+                    <td>{product.countInStock} </td>
                     <td className="btns__td">
                       <button
                         onClick={() => deleteHandler(product._id)}
-                        className="btn danger"
+                        className="product__buttons"
                       >
                         delete
                       </button>
-                      <br />
                       <button
                         onClick={() => {
                           navigate(`/product/id/${product._id}`);
                         }}
-                        className="btn danger"
+                        className="product__buttons__edit"
                       >
                         edit
                       </button>

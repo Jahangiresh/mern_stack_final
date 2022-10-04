@@ -1,13 +1,7 @@
 import "./app.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/header/Header";
 import Main from "./pages/Main";
 import About from "./pages/About";
@@ -117,7 +111,6 @@ function App() {
             path="/signup"
             element={<Auth setuserinfo={setUserInfo} userinfo={userInfo} />}
           />
-          {/* <Route path="/logout" element={<Logout />} /> */}
           <Route
             path="/product/:slug"
             element={
@@ -144,7 +137,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/*admin routes*/}
           <Route
             path="/admin/dashboard"
             element={

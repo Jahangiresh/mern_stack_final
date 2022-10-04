@@ -76,7 +76,7 @@ const DashEmployeeDetails = () => {
     <MessageBox>{error}</MessageBox>
   ) : (
     <div className="dashuserdetails">
-      <div className="dashuserdetails__container container">
+      <div className="dashuserdetails__container ">
         <div className="dashuserdetails__container__imagebox row">
           <div className="dashuserdetails__container__imagebox__image">
             <img src={user.profilePic} alt="" />
@@ -153,6 +153,7 @@ const DashEmployeeDetails = () => {
               name=""
               id=""
               cols="30"
+              placeholder="your message here"
               rows="10"
             ></textarea>
           </div>

@@ -44,18 +44,13 @@ const Product = ({
   let userInfo = JSON.parse(localStorage.getItem("userInfo"));
   useEffect(() => {}, []);
   const cartUpdateHandler = async () => {
-    try {
-      await axios.put(
-        "/api/users/updateprofilecart",
-        {},
-        {
-          headers: { Authorization: `Bearer ${userInfo.data.token}` },
-        }
-      );
-      toast.success("added to cart");
-    } catch (error) {
-      toast.error(getError(error));
-    }
+    await axios.put(
+      "/api/users/updateprofilecart",
+      {},
+      {
+        headers: { Authorization: `Bearer ${userInfo.data.token}` },
+      }
+    );
   };
 
   return (

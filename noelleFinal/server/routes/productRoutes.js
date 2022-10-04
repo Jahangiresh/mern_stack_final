@@ -5,6 +5,8 @@ const productRouter = express.Router();
 productRouter.post("/", async (req, res) => {
   const newProduct = new Product({
     name: req.body.name,
+    name: req.body.name,
+    substance: req.body.substance,
     slug: req.body.slug,
     image: req.body.image,
     desc: req.body.desc,
@@ -12,7 +14,6 @@ productRouter.post("/", async (req, res) => {
     category: req.body.category,
     price: req.body.price,
     countInStock: req.body.countInStock,
-    numReviews: req.body.numReviews,
     isTrending: req.body.isTrending,
     count: req.body.count,
     instruction: req.body.instruction,
@@ -68,12 +69,14 @@ productRouter.put("/update/:id", async (req, res) => {
     prod.name = req.body.name;
     prod.countInStock = req.body.countInStock;
     prod.price = req.body.price;
+    prod.isTrending = req.body.isTrending;
 
     const updatedProduct = await prod.save();
     res.send({
       name: updatedProduct.name,
       countInStock: updatedProduct.countInStock,
       price: updatedProduct.price,
+      isTrending: updatedProduct.isTrending,
     });
   } else {
     res.status(404).send({ message: "product not found" });
@@ -88,10 +91,29 @@ productRouter.put("/comment/:slug", async (req, res) => {
 
     const updatedProduct = await prod.save();
     res.send({
-      comments: updatedProduct.comments,
+      comments: {
+        comment: updatedProduct.comments,
+        userName: updatedProduct.userName,
+      },
     });
   } else {
     res.status(404).send({ message: "product not found" });
+  }
+});
+productRouter.put("/rating/:slug", async (req, res) => {
+  const prod = await Product.findOne({ slug: req.params.slug });
+
+  if (prod) {
+    prod.ratings.push(req.body.ratings);
+
+    const ratingProd = await prod.save();
+    res.send({
+      ratings: {
+        rating: ratingProd.ratings,
+      },
+    });
+  } else {
+    res.status(404).send({ message: "ratingProd not found" });
   }
 });
 export default productRouter;

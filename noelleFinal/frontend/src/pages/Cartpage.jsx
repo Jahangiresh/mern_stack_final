@@ -5,6 +5,7 @@ import { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Cartpage = ({ rerender, setrerender }) => {
   const navigate = useNavigate();
@@ -76,18 +77,22 @@ const Cartpage = ({ rerender, setrerender }) => {
                           </td>
                           <td className="table__cells">
                             <span className="cell__span counter__parent">
-                              <span className="counter">
-                                {" "}
-                                <FaMinusCircle
-                                  onClick={() => countMinus(myProduct)}
-                                />
-                              </span>
+                              {myProduct.count === 0 ? null : (
+                                <span className="counter">
+                                  <FaMinusCircle
+                                    onClick={() => countMinus(myProduct)}
+                                  />
+                                </span>
+                              )}
                               {myProduct.count}
-                              <span className="counter">
-                                <FaPlusCircle
-                                  onClick={() => countPlus(myProduct)}
-                                />
-                              </span>{" "}
+                              {myProduct.count ===
+                              myProduct.countInStock ? null : (
+                                <span className="counter">
+                                  <FaPlusCircle
+                                    onClick={() => countPlus(myProduct)}
+                                  />
+                                </span>
+                              )}
                             </span>
                           </td>
                           <td className="table__cells cell__span__total">
@@ -117,12 +122,24 @@ const Cartpage = ({ rerender, setrerender }) => {
                 Total price: <span>{subtotal} AZN</span>
               </span>
               <hr />
-              <button className="checkout__btn" onClick={checkoutHandler}>
-                Proceed to checkout{" "}
-                <span>
-                  <FaChevronRight />
-                </span>
-              </button>
+              {subtotal > 0 ? (
+                <button className="checkout__btn" onClick={checkoutHandler}>
+                  Proceed to checkout{" "}
+                  <span>
+                    <FaChevronRight />
+                  </span>
+                </button>
+              ) : (
+                <button
+                  className="checkout__btn"
+                  onClick={() => toast.error("no product selected")}
+                >
+                  Proceed to checkout{" "}
+                  <span>
+                    <FaChevronRight />
+                  </span>
+                </button>
+              )}
 
               <hr />
             </div>

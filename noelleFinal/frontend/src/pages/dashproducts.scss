@@ -1,35 +1,108 @@
 .dashproductscreen {
+  padding-top: 100px;
   &__container {
-    &__table {
+    .dashproductscreen__container__table {
+      thead {
+        @media (max-width: 993px) {
+          display: none;
+        }
+      }
       td {
         vertical-align: middle;
       }
 
       &__tbody {
         .btns__td {
-          padding: 0;
-          button {
-            width: 100%;
-            //   border: 0;
-            border-radius: 0;
+          .product__buttons {
+            text-transform: uppercase;
+            font-size: 13px !important;
+            letter-spacing: 0.13em;
+            border-radius: 0 !important;
+            display: inline-block;
+            color: #000000;
+            height: 100%;
+
+            width: 50%;
+            border: none;
+            padding: 18px 30px;
+            line-height: 1.25em;
+            vertical-align: top;
+            font-weight: 400;
+            transition: opacity 0.3s, color 0.3s, background-color 0.3s,
+              border-color 0.3s, transform 0.3s;
+            &:hover {
+              color: red;
+            }
+          }
+          .product__buttons__edit {
+            text-transform: uppercase;
+            font-size: 13px !important;
+            letter-spacing: 0.13em;
+            border-radius: 0 !important;
+            display: inline-block;
+            color: #000000;
+            height: 100%;
+
+            width: 50%;
+            border: none;
+            padding: 18px 30px;
+            line-height: 1.25em;
+            vertical-align: top;
+            font-weight: 400;
+            transition: opacity 0.3s, color 0.3s, background-color 0.3s,
+              border-color 0.3s, transform 0.3s;
+            &:hover {
+              color: aquamarine;
+            }
+          }
+        }
+
+        tr {
+          @media (max-width: 993px) {
+            display: flex;
+            flex-direction: column;
+          }
+          .img__td {
+            @media (max-width: 993px) {
+              height: 200px;
+            }
+          }
+          td {
+            height: 70px;
+            padding: 0;
           }
         }
         img {
           object-fit: contain;
-          height: 100px;
+          object-position: center;
+          height: 100%;
           width: 100%;
         }
       }
     }
     .add__products {
+      text-transform: uppercase;
+      font-size: 13px !important;
+      letter-spacing: 0.13em;
+      border-radius: 0 !important;
+      display: inline-block;
+      background-color: white;
+      color: #000000;
+      border: 1px solid #000000;
+      height: 100%;
+
       width: 100%;
-      padding: 23px 0;
-      border: none;
-      transition: 0.2s ease-in;
+
+      padding: 18px 30px;
+      line-height: 1.25em;
+      vertical-align: top;
+      font-weight: 400;
+      transition: opacity 0.3s, color 0.3s, background-color 0.3s,
+        border-color 0.3s, transform 0.3s;
+      margin-bottom: 100px;
       &:hover {
-        background-color: silver;
-        color: aliceblue;
-        font-weight: bold;
+        background: black;
+        color: white;
       }
     }
   }

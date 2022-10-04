@@ -70,7 +70,7 @@ const DashEmployeeScreen = () => {
     <MessageBox>{error}</MessageBox>
   ) : (
     <div className="dashuserscreen">
-      <div className="dashuserscreen__container container">
+      <div className="dashuserscreen__container ">
         <Table
           className="dashuserscreen__container__table"
           striped
@@ -108,16 +108,15 @@ const DashEmployeeScreen = () => {
                     <td className="btns__td">
                       <button
                         onClick={() => deleteHandler(user._id)}
-                        className="btn danger"
+                        className="del__btn"
                       >
                         delete
                       </button>
-                      <br />
                       <button
                         onClick={() => {
                           navigate(`/employee/${user._id}`);
                         }}
-                        className="btn danger"
+                        className="edit__btn"
                       >
                         details
                       </button>

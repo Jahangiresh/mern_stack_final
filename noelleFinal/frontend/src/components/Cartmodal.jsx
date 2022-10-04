@@ -70,7 +70,10 @@ export default function BasicModal({ count, setrerender, rerender }) {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             <div className="modal__header row">
               <div className="modal__header__logo">
-                <img src={ip} alt="logo jpg" />
+                <img
+                  src="https://cdn.pixabay.com/photo/2016/11/25/07/00/diamond-1857733_1280.png"
+                  alt="logo jpg"
+                />
               </div>
             </div>
             <div className="modal__body">
@@ -89,7 +92,7 @@ export default function BasicModal({ count, setrerender, rerender }) {
                       <span className="d-none">{p._id}</span>
                     </div>
                     <div className="modal__body__product__count col-lg-3 d-md-3 col-6">
-                      <input type="number" value={p.count} />
+                      <input type="number" defaultValue={p.count} />
                     </div>
                   </div>
                 );
@@ -102,15 +105,13 @@ export default function BasicModal({ count, setrerender, rerender }) {
               </div>
             </div>
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Link
-              onClick={handleClose}
-              className="cartmodal__link"
-              to="/cartpage"
-            >
-              Buy now
-            </Link>
-          </Typography>
+          <Link
+            onClick={handleClose}
+            className="cartmodal__link"
+            to="/cartpage"
+          >
+            Buy now
+          </Link>
         </Box>
       </Modal>
     </div>

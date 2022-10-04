@@ -23,7 +23,13 @@
       }
     }
     &__statistics {
+      @media (max-width: 992px) {
+        flex-direction: column;
+      }
       &__cols {
+        @media (max-width: 992px) {
+          width: 100%;
+        }
         &__card {
           padding: 40px 30px;
           margin-bottom: 20px;
@@ -32,7 +38,13 @@
     }
     &__message {
       align-items: center;
+      @media (max-width: 992px) {
+        flex-direction: column;
+      }
       &__col {
+        @media (max-width: 992px) {
+          width: 100%;
+        }
         .text__msg {
           width: 100%;
         }

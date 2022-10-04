@@ -10,9 +10,9 @@ import LoadingBox from "./LoadingBox";
 import MessageBox from "./MessageBox";
 import { getError } from "../utils";
 import { useRef } from "react";
-
-import Box from "@mui/material/Box";
-import Stars from "@mui/material/Rating";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -20,6 +20,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import { MdExpandMore } from "react-icons/md";
 import { toast } from "react-toastify";
+import Box from "@mui/material/Box";
+import Ratingmui from "@mui/material/Rating";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -37,7 +39,6 @@ const reducer = (state, action) => {
 function ProductScreen({ setcount, setrerender }) {
   const [value, setValue] = useState(2);
   const navigate = useNavigate();
-
   const params = useParams();
   const { slug } = params;
 
@@ -46,14 +47,16 @@ function ProductScreen({ setcount, setrerender }) {
     loading: true,
     error: "",
   });
-  const [comment, setComment] = useState();
+  const [average, setAverage] = useState();
 
-  console.log(product.comments);
+  const [comment, setComment] = useState();
+  const [commentName, setCommentName] = useState();
   useEffect(() => {
     const getProduct = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
         const resp = await axios.get(`/api/products/slug/${slug}`);
+
         dispatch({ type: "FETCH_SUCCESS", payload: resp.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
@@ -76,7 +79,6 @@ function ProductScreen({ setcount, setrerender }) {
       product.count = productCount.current.value;
       products.push(product);
     } else {
-      // products.splice(products.indexOf(existedProd), 1); --delete prod
       existedProd.count = productCount.current.value;
     }
 
@@ -112,8 +114,18 @@ function ProductScreen({ setcount, setrerender }) {
   const commentHandler = async () => {
     try {
       await axios.put(`/api/products/comment/${slug}`, {
-        comments: comment,
+        comments: {
+          comment: comment,
+          userName: commentName,
+        },
       });
+
+      await axios.put(`/api/products/rating/${slug}`, {
+        ratings: {
+          rating: value,
+        },
+      });
+
       toast.success("comment added");
     } catch (error) {
       toast.error(getError(error));
@@ -126,6 +138,34 @@ function ProductScreen({ setcount, setrerender }) {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const settings = {
+    customPaging: function (i) {
+      return (
+        <a>
+          <img src={product.image} alt="" />
+        </a>
+      );
+    },
+    dots: true,
+    dotsClass: "slick-dots slick-thumb",
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      let sum = 0;
+
+      product.ratings.map((prod) => {
+        sum += prod.rating;
+      });
+      let Mainaverage = Math.round(sum / product.ratings.length);
+      setAverage(Mainaverage);
+    }, 10);
+  }, [product, loading]);
+
   return loading ? (
     <div>
       <LoadingBox />
@@ -133,12 +173,28 @@ function ProductScreen({ setcount, setrerender }) {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div className="product">
+    <div key={product._id} className="product">
+      <Helmet>
+        <title>{product.name}</title>
+      </Helmet>
       <div className="product__container container">
         <div className="product__container__row row">
           <div className="product__container__row__left col-6">
             <div className="product__container__row__left__image">
-              <img src={product.image} alt="" />
+              <Slider className="slick__prod" {...settings}>
+                <div>
+                  <img src={product.image} alt="" />
+                </div>
+                <div>
+                  <img src={product.image} alt="" />
+                </div>
+                <div>
+                  <img src={product.image} alt="" />
+                </div>
+                <div>
+                  <img src={product.image} alt="" />
+                </div>
+              </Slider>
             </div>
           </div>
           <div className="product__container__row__right col-6">
@@ -151,7 +207,9 @@ function ProductScreen({ setcount, setrerender }) {
                 <div className="product__container__row__right__content__counter__inputs">
                   <span
                     onClick={(e) => {
-                      e.target.nextSibling.value--;
+                      if (e.target.nextSibling.value > 0) {
+                        e.target.nextSibling.value--;
+                      }
                     }}
                   >
                     -
@@ -166,7 +224,12 @@ function ProductScreen({ setcount, setrerender }) {
                   />{" "}
                   <span
                     onClick={(e) => {
-                      e.target.previousElementSibling.value++;
+                      if (
+                        e.target.previousElementSibling.value <
+                        product.countInStock
+                      ) {
+                        e.target.previousElementSibling.value++;
+                      }
                     }}
                   >
                     +
@@ -187,6 +250,11 @@ function ProductScreen({ setcount, setrerender }) {
                 buy it now
               </button>
             </div>
+            {product.countInStock === 0 ? (
+              <span className="availible bg-danger">not available</span>
+            ) : (
+              <span className="availible text-success">available</span>
+            )}
             <hr />
             <div className="product__container__row__right__content__acc">
               <Accordion
@@ -245,21 +313,16 @@ function ProductScreen({ setcount, setrerender }) {
             <div className="product__container__row__right__reviews">
               <h2>
                 Costumer reviews:
-                <Rating
-                  rating={product.rating}
-                  numReviews={product.numReviews}
-                />
+                <Rating rating={average} numReviews={product.comments.length} />
               </h2>
               {product.comments.length > 0 ? (
                 product.comments.map((p) => {
                   return (
-                    <div className="review__comments">
+                    <div key={p._id} className="review__comments">
                       <div className="costumer__comment">
-                        <p>Jahangir Shirinov:</p>
-                        <span>12 may, 1992</span>
-                        <hr />
-
-                        {p}
+                        <p>{p.userName}:</p>
+                        <span>{p.created_at.substring(0, 10)}</span>
+                        <hr />"{p.comment}"
                       </div>
                     </div>
                   );
@@ -278,18 +341,37 @@ function ProductScreen({ setcount, setrerender }) {
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
-                <Typography sx={{ color: "text.secondary" }}>
-                  <h2 className="h2__comment">Write a review</h2>
-                </Typography>
+                <h2 className="h2__comment">Write a review</h2>
               </AccordionSummary>
               <AccordionDetails>
+                <Box
+                  sx={{
+                    "& > legend": { mt: 2 },
+                  }}
+                >
+                  <Ratingmui
+                    name="simple-controlled"
+                    value={value}
+                    style={{ color: "#00674a   " }}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                  />
+                </Box>
+                <input
+                  onChange={(e) => setCommentName(e.target.value)}
+                  className="comment__text w-100"
+                  type="text"
+                  placeholder="your name..."
+                />
                 <input
                   onChange={(e) => setComment(e.target.value)}
-                  className="comment__text w-100 py-3"
+                  className="comment__text w-100 py-3 my-2"
                   type="text"
+                  placeholder="comment here..."
                 />
                 <button
-                  className="add__comment"
+                  className="add__comment "
                   onClick={() => commentHandler()}
                 >
                   add comment

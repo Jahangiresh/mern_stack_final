@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import LoadingBox from "../components/LoadingBox";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -31,6 +32,7 @@ const DashAddProducts = () => {
   const [category, setCategory] = useState("");
   const [desc, setDesc] = useState("");
   const [price, setPrice] = useState("");
+  const [substance, setSubstance] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [instruction, setInstruction] = useState("");
 
@@ -48,11 +50,10 @@ const DashAddProducts = () => {
         desc: desc,
         price: price,
         countInStock: countInStock,
-        numReviews: 0,
         isTrending: true,
         count: 1,
         instruction: instruction,
-        rating: 0,
+        substance: substance,
       });
       dispatch({ type: "CREATE_SUCCESS" });
       toast.success("Product created successfully");
@@ -62,7 +63,9 @@ const DashAddProducts = () => {
     }
   };
 
-  return (
+  return loading ? (
+    <LoadingBox></LoadingBox>
+  ) : (
     <div className="dashaddproducts">
       <div className="dashaddproducts__container container">
         <form onSubmit={createHandler}>
@@ -108,6 +111,15 @@ const DashAddProducts = () => {
               required
             />
           </Form.Group>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>Substance</Form.Label>
+            <Form.Control
+              value={substance}
+              onChange={(e) => setSubstance(e.target.value)}
+              required
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Quantity</Form.Label>
             <Form.Control

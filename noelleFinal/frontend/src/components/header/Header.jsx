@@ -1,29 +1,15 @@
 import React, { useEffect } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { FiLogIn } from "react-icons/fi";
-import ip from "../images/logoWHITE.png";
 
 import Menuslider from "../Menuslider";
 import "./header.scss";
-import { useState } from "react";
 import Cartmodal from "../Cartmodal";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavDropdown } from "react-bootstrap";
+import { useState } from "react";
+import { useReducer } from "react";
 
 const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
   let LOCALproducts = JSON.parse(localStorage.getItem("products"));
-
-  // const [Slider, setSlider] = useState(false);
-  const [Modal, setModal] = useState(false);
-
-  // const menuSliderHandler = (e) => {
-  //   setSlider((value) => !value);
-
-  //   Slider
-  //     ? e.target.classList.remove("plusIconActive")
-  //     : e.target.classList.add("plusIconActive");
-  // };
-
   const signOutHandler = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("address");
@@ -200,7 +186,6 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
 
                   <li className="cart m-0">
                     <Cartmodal
-                      modalproops={Modal}
                       count={count}
                       setcount={setCount}
                       setrerender={setrerender}
@@ -213,153 +198,12 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                       </span>
                     ) : null}
                   </li>
-                  {/* <li className="plus d-lg-none d-md-none">
-                    <AiOutlinePlus
-                      className="plusIcon"
-                      onClick={menuSliderHandler}
-                    />
-                  </li> */}
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="upper__header">
-        <div className="upper__header__row row">
-          <div className="upper__header__row__left col-5"></div>
-          <div className="upper__header__row__interP col-2">
-            <img src={ip} alt="inpng" />
-          </div>
-          <div className="upper__header__row__right col-5"></div>
-        </div>
-      </div> */}
-
-      {/* <div className="header">
-        <div className="header__container container">
-          <div className="header__container__row row">
-            <div className="header__container__row__navs col-6   ">
-              <ul className="header__container__row__navs__ul">
-                <li>
-                  <Link className="navs__link" to="/">
-                    home
-                  </Link>
-                </li>
-                <li>
-                  <Link className="navs__link" to="/about">
-                    about us
-                  </Link>
-                </li>
-                <li>
-                  <Link className="navs__link" to="/shop">
-                    shop
-                  </Link>
-                </li>
-                <li>
-                  <Link className="navs__link" to="/blog">
-                    blog
-                  </Link>
-                </li>
-                <li>
-                  <Link className="navs__link" to="/contact">
-                    contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="header__container__row__right col-6">
-              <ul>
-                {userinfo ? (
-                  <NavDropdown
-                    className="sing__name"
-                    title={userinfo.data.name}
-                    id="basic-nav-dropdown"
-                  >
-                    <Link id="RouterNavLink" to="/profile">
-                      User Profile
-                    </Link>{" "}
-                    <br />
-                    <Link id="RouterNavLink" to="/orderhistory">
-                      Order History
-                    </Link>
-                    <NavDropdown.Divider />
-                    <li>
-                      <Link
-                        id="RouterNavLink"
-                        to="#signout"
-                        onClick={signOutHandler}
-                      >
-                        sign out
-                      </Link>
-                    </li>
-                  </NavDropdown>
-                ) : (
-                  <li>
-                    <Link className="sing__links " to="/signin">
-                      signin <FiLogIn />
-                    </Link>
-                  </li>
-                )}
-                {userinfo && userinfo.data.isAdmin && (
-                  <NavDropdown
-                    className="admin__drop "
-                    title="Admin"
-                    id="admin-nav-dropdown"
-                  >
-                    <li>
-                      <Link id="RouterNavLink" to="/admin/dashboard">
-                        Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                      <Link id="RouterNavLink" to="/admin/productlist">
-                        Products
-                      </Link>
-                    </li>
-
-                    <li>
-                      <Link id="RouterNavLink" to="/admin/orderlist">
-                        Orders
-                      </Link>
-                    </li>
-                    <li>
-                      <Link id="RouterNavLink" to="/admin/userlist">
-                        Users
-                      </Link>
-                    </li>
-                    <li>
-                      <Link id="RouterNavLink" to="/admin/employeelist">
-                        Employees
-                      </Link>
-                    </li>
-                  </NavDropdown>
-                )}
-
-                <li className="cart m-0">
-                  <Cartmodal
-                    modalproops={Modal}
-                    count={count}
-                    setcount={setCount}
-                    setrerender={setrerender}
-                    rerender={rerender}
-                  />
-
-                  {LOCALproducts && LOCALproducts.length > 0 ? (
-                    <span className="cart__count">{LOCALproducts.length}</span>
-                  ) : null}
-                </li>
-                <li className="plus d-lg-none d-md-none">
-                  <AiOutlinePlus
-                    className="plusIcon"
-                    onClick={menuSliderHandler}
-                  />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };
