@@ -127,7 +127,7 @@ const Main = ({ setcount, setrerender }) => {
                 Being well-groomed goes beyond a great cut or great style. Learn
                 how V76 can help.
               </p>
-              <button>MEET VAUGHN</button>
+              <button onClick={() => navigate("/contact")}>FIND US</button>
             </div>
           </div>
         </div>
