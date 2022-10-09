@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema(
         rating: { type: Number, default: 0 },
       },
     ],
-    substance: { type: String, required: true },
+    substance: { type: String },
 
     comments: [
       {
