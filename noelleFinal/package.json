@@ -1,11 +1,8 @@
 {
   "name": "noellefinal",
   "version": "1.0.0",
-  "description": "a really cool app",
+  "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "4.1.1"
-  },
   "scripts": {
     "build": "cd server && npm install && cd ../frontend && npm install && npm run build",
     "start": "node server/server.js",
