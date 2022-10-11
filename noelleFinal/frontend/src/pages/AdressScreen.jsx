@@ -54,13 +54,16 @@ const AdressScreen = () => {
       </Helmet>
       <div className="adress__cover"></div>
       <div className="container small-container">
-        <h1>Delievery Address</h1>
+        <div className="h1__div">
+          <h1>Delievery Address</h1>
+        </div>
 
         <CheckOutSteps step1 step2></CheckOutSteps>
         <Form onSubmit={submitHandler}>
           <FormLabel>Full Name</FormLabel>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Control
+              className="address__inp"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -69,6 +72,7 @@ const AdressScreen = () => {
           <FormLabel>address</FormLabel>
           <Form.Group className="mb-3" controlId="address">
             <Form.Control
+              className="address__inp"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
@@ -78,6 +82,7 @@ const AdressScreen = () => {
 
           <Form.Group className="mb-3" controlId="city">
             <Form.Control
+              className="address__inp"
               value={city}
               onChange={(e) => setCity(e.target.value)}
               required
@@ -86,6 +91,7 @@ const AdressScreen = () => {
           <FormLabel>postal code</FormLabel>
           <Form.Group className="mb-3" controlId="postalCode">
             <Form.Control
+              className="address__inp"
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
               required
@@ -94,13 +100,14 @@ const AdressScreen = () => {
           <FormLabel>country</FormLabel>
           <Form.Group className="mb-3" controlId="country">
             <Form.Control
+              className="address__inp"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               required
             />
           </Form.Group>
           <div className="mb-3">
-            <Button variant="primary" type="submit">
+            <Button className="address__btn" variant="primary" type="submit">
               continue
             </Button>
           </div>

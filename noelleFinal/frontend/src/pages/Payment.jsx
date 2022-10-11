@@ -56,8 +56,10 @@ const Payment = () => {
               onChange={(e) => setPaymentMethodName(e.target.value)}
             />
           </div>
-          <div className="mb-3">
-            <Button type="submit">Continue</Button>
+          <div className="mb-3 ">
+            <Button className="register__btn" type="submit">
+              Continue
+            </Button>
           </div>
         </Form>
       </div>

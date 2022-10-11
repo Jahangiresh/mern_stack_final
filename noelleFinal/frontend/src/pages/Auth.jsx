@@ -115,6 +115,14 @@ const Auth = ({ setuserinfo, userinfo }) => {
                   </button>
                   <button
                     onClick={() => {
+                      navigate("/signin");
+                    }}
+                    className="create__btn"
+                  >
+                    already have an account
+                  </button>
+                  <button
+                    onClick={() => {
                       navigate("/shop");
                     }}
                     className="create__btn"

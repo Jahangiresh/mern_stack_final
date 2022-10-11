@@ -71,6 +71,13 @@
           margin: 0;
           margin-bottom: 20px;
         }
+        .comment__text {
+          margin-top: 30px;
+          border: 1px solid #e3e3e3;
+          // border-bottom: 1px solid black;
+          outline: none;
+          padding: 0 0 0 10px;
+        }
         .add__comment {
           width: 100%;
           text-transform: uppercase;

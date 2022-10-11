@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logger from "use-reducer-logger";
 import { useReducer } from "react";
@@ -47,6 +47,7 @@ function ProductScreen({ setcount, setrerender }) {
     loading: true,
     error: "",
   });
+  let userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [average, setAverage] = useState();
 
   const [comment, setComment] = useState();
@@ -331,53 +332,60 @@ function ProductScreen({ setcount, setrerender }) {
                 <h2>no reviews</h2>
               )}
             </div>
-            <Accordion
-              className="comment__accordion"
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
-            >
-              <AccordionSummary
-                expandIcon={<MdExpandMore />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
+            {userInfo ? (
+              <Accordion
+                className="comment__accordion"
+                expanded={expanded === "panel1"}
+                onChange={handleChange("panel1")}
               >
-                <h2 className="h2__comment">Write a review</h2>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Box
-                  sx={{
-                    "& > legend": { mt: 2 },
-                  }}
+                <AccordionSummary
+                  expandIcon={<MdExpandMore />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
                 >
-                  <Ratingmui
-                    name="simple-controlled"
-                    value={value}
-                    style={{ color: "#00674a   " }}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
+                  <h2 className="h2__comment">Write a review</h2>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box
+                    sx={{
+                      "& > legend": { mt: 2 },
                     }}
+                  >
+                    <Ratingmui
+                      name="simple-controlled"
+                      value={value}
+                      style={{ color: "#00674a   " }}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                    />
+                  </Box>
+                  <input
+                    onChange={(e) => setCommentName(e.target.value)}
+                    className="comment__text w-100"
+                    type="text"
+                    placeholder="your name..."
                   />
-                </Box>
-                <input
-                  onChange={(e) => setCommentName(e.target.value)}
-                  className="comment__text w-100"
-                  type="text"
-                  placeholder="your name..."
-                />
-                <input
-                  onChange={(e) => setComment(e.target.value)}
-                  className="comment__text w-100 py-3 my-2"
-                  type="text"
-                  placeholder="comment here..."
-                />
-                <button
-                  className="add__comment "
-                  onClick={() => commentHandler()}
-                >
-                  add comment
-                </button>
-              </AccordionDetails>
-            </Accordion>
+                  <input
+                    onChange={(e) => setComment(e.target.value)}
+                    className="comment__text w-100 py-3 my-2"
+                    type="text"
+                    placeholder="comment here..."
+                  />
+                  <button
+                    className="add__comment "
+                    onClick={() => commentHandler()}
+                  >
+                    add comment
+                  </button>
+                </AccordionDetails>
+              </Accordion>
+            ) : (
+              <span>
+                please log in <Link to="/signin">here</Link> for writing a
+                review
+              </span>
+            )}
           </div>
         </div>
       </div>
