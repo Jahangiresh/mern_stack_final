@@ -7,7 +7,7 @@ import axios from "axios";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
-// import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Product = ({
   productslist,
@@ -21,6 +21,7 @@ const Product = ({
   if (localStorage.getItem("products") === null) {
     localStorage.setItem("products", JSON.stringify([]));
   }
+  const { t } = useTranslation();
 
   const addToLocal = (prod) => {
     let products = JSON.parse(localStorage.getItem("products"));
@@ -78,13 +79,13 @@ const Product = ({
                 </div>
 
                 {prod.countInStock === 0 ? (
-                  <button className="add__cart">out of stock</button>
+                  <button className="add__cart">{t("out of stock")}</button>
                 ) : (
                   <button
                     onClick={() => addToLocal(prod)}
                     className="add__cart"
                   >
-                    add to card
+                    {t("Add to cart")}
                   </button>
                 )}
               </div>

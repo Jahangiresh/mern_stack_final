@@ -8,16 +8,12 @@ import FormLabel from "react-bootstrap/esm/FormLabel";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import CheckOutSteps from "../components/CheckOutSteps";
+import { useTranslation } from "react-i18next";
+
 const AdressScreen = () => {
-  // let localAddress = JSON.parse(localStorage.getItem("address"));
+  const { t } = useTranslation();
 
   let userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-  // const [fullName, setFullName] = useState(localAddress.fullName || "");
-  // const [address, setAddress] = useState(localAddress.address || "");
-  // const [city, setCity] = useState(localAddress.city || "");
-  // const [postalCode, setPostalCode] = useState(localAddress.postalCode || "");
-  // const [country, setCountry] = useState(localAddress.country || "");
 
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
@@ -55,12 +51,12 @@ const AdressScreen = () => {
       <div className="adress__cover"></div>
       <div className="container small-container">
         <div className="h1__div">
-          <h1>Delievery Address</h1>
+          <h1>{t("Delievery Address")}</h1>
         </div>
 
         <CheckOutSteps step1 step2></CheckOutSteps>
         <Form onSubmit={submitHandler}>
-          <FormLabel>Full Name</FormLabel>
+          <FormLabel>{t("Full Name")}</FormLabel>
           <Form.Group className="mb-3" controlId="fullName">
             <Form.Control
               className="address__inp"
@@ -69,7 +65,7 @@ const AdressScreen = () => {
               required
             />
           </Form.Group>
-          <FormLabel>address</FormLabel>
+          <FormLabel> {t("address")}</FormLabel>
           <Form.Group className="mb-3" controlId="address">
             <Form.Control
               className="address__inp"
@@ -78,7 +74,7 @@ const AdressScreen = () => {
               required
             />
           </Form.Group>
-          <FormLabel>city</FormLabel>
+          <FormLabel> {t("city")}</FormLabel>
 
           <Form.Group className="mb-3" controlId="city">
             <Form.Control
@@ -88,7 +84,7 @@ const AdressScreen = () => {
               required
             />
           </Form.Group>
-          <FormLabel>postal code</FormLabel>
+          <FormLabel>{t("postal code")} </FormLabel>
           <Form.Group className="mb-3" controlId="postalCode">
             <Form.Control
               className="address__inp"
@@ -97,7 +93,7 @@ const AdressScreen = () => {
               required
             />
           </Form.Group>
-          <FormLabel>country</FormLabel>
+          <FormLabel>{t("country")}</FormLabel>
           <Form.Group className="mb-3" controlId="country">
             <Form.Control
               className="address__inp"
@@ -108,7 +104,7 @@ const AdressScreen = () => {
           </Form.Group>
           <div className="mb-3">
             <Button className="address__btn" variant="primary" type="submit">
-              continue
+              {t("continue")}
             </Button>
           </div>
         </Form>

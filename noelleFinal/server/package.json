@@ -17,6 +17,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.0",
+    "node-modules": "^1.0.1",
     "nodemon": "^2.0.19",
     "react-bootstrap": "^2.5.0",
     "react-helmet-async": "^1.3.0"

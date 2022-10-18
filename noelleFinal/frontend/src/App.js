@@ -36,6 +36,7 @@ import DashOrderDetails from "./pages/DashOrderDetails";
 import DashEmployeeScreen from "./pages/DashEmployeeScreen";
 import DashEmployeeDetails from "./pages/DashEmployeeDetails";
 
+
 function App() {
   if (localStorage.getItem("products") === null) {
     localStorage.setItem("products", JSON.stringify([]));
@@ -60,11 +61,13 @@ function App() {
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem("userInfo")));
   }, [reRender]);
+
   return (
     <div className="App">
       <Router>
         <ScrollToTop />
         <ToastContainer position="bottom-center" limit={1} />
+
         <Header
           count={count}
           setcount={setCount}

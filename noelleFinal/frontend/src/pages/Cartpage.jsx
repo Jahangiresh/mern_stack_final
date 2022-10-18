@@ -6,8 +6,11 @@ import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Cartpage = ({ rerender, setrerender }) => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   let myProducts = JSON.parse(localStorage.getItem("products"));
   // const [productCount, setProductCount] = useState();
@@ -50,7 +53,7 @@ const Cartpage = ({ rerender, setrerender }) => {
     <div className="cartpage">
       <div className="cartpage__cover"></div>
       <div className="cartpage__container container">
-        <h1 className="my-5">Shopping Cart</h1>
+        <h1 className="my-5">{t("Shopping Cart")}</h1>
         {myProducts.length === 0 ? (
           <h1>
             your cart is empty. <Link to="/shop">Go Shopping</Link>
@@ -119,12 +122,12 @@ const Cartpage = ({ rerender, setrerender }) => {
             </div>
             <div className="cartpage__container__row__right col-lg-3">
               <span className="total__price">
-                Total price: <span>{subtotal} AZN</span>
+                {t("Total price")}: <span>{subtotal} AZN</span>
               </span>
               <hr />
               {subtotal > 0 ? (
                 <button className="checkout__btn" onClick={checkoutHandler}>
-                  Proceed to checkout{" "}
+                 {t("Proceed to checkout")}{" "}
                   <span>
                     <FaChevronRight />
                   </span>

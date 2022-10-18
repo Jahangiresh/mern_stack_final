@@ -2,53 +2,57 @@ import React from "react";
 import "./footer.scss";
 import { Link } from "react-router-dom";
 import { FooterContact } from "./FooterContact";
+import { useTranslation } from "react-i18next";
+
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="footer">
       <div className="footer__container container">
         <div className="footer__container__row row">
           <div className="footer__container__row__col col-lg-3 col-12">
-            <h3>About Us</h3>
+            <h3> {t("ABOUT US")}</h3>
             <ul>
               <li>
                 <Link to="/about" className="footerlinks">
-                  about us
+                  {t("ABOUT US")}
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="footerlinks">
-                  blog
+                  {t("BLOG")}
                 </Link>
               </li>
               <li>
                 <Link to="/shop" className="footerlinks">
-                  shop
+                  {t("SHOP")}
                 </Link>
               </li>
               <li>
                 <Link to="/signup" className="footerlinks">
-                  sign up
+                  {t("SIGN UP")}
                 </Link>
               </li>
               <li>
                 <Link to="/signin" className="footerlinks">
-                  sign in
+                  {t("SIGN IN")}
                 </Link>
               </li>
             </ul>
           </div>
           <div className="footer__container__row__col col-lg-3 col-12">
-            <h3>Support</h3>
+            <h3> {t("SUPPORT")}</h3>
             <ul>
               <li>
                 <Link to="/contact" className="footerlinks">
-                  contact us
+                  {t("CONTACT")}
                 </Link>
               </li>
             </ul>
           </div>
           <div className="footer__container__row__col col-lg-3 col-12">
-            <h3>Social</h3>
+            <h3>{t("Social")}</h3>
             <ul>
               <li>
                 <a
@@ -71,10 +75,11 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer__container__row__col col-lg-3 col-12">
-            <h3>Get connected now</h3>
+            <h3>{t("Get connected now")}</h3>
             <p>
-              Add more beauty to your messages! Join us to be the first to know
-              about exclusive offers and exciting news.
+              {t(
+                "Add more beauty to your messages! Join us to be the first to know about exclusive offers and exciting news."
+              )}
             </p>
 
             <FooterContact />

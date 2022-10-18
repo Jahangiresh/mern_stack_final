@@ -1,6 +1,7 @@
 import React from "react";
 import "./contact.scss";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
   AiOutlineInstagram,
@@ -9,6 +10,8 @@ import {
 } from "react-icons/ai";
 import { ContactUs } from "../components/ContactUs";
 const Contact = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="contact">
       <div className="contact__img">
@@ -16,7 +19,7 @@ const Contact = () => {
           <div className="contact__container__row row">
             <div className="contact__container__row__left col-lg-6 col-12">
               <div className="contact__container__row__left__content">
-                <h1>Contact Us</h1>
+                <h1>{t("CONTACT")}</h1>
 
                 <ContactUs />
                 <div className="contact__social">
@@ -41,9 +44,9 @@ const Contact = () => {
             <div className="contact__container__row__right col-lg-6 col-12">
               <ul className="contact__ul">
                 <li>
-                  <p>Phone: 1 (888) 444-8866</p>
-                  <p>Fax: 1 (888) 666-8866</p>
-                  <p>Hours: M-F, 7 AM - 6 PM ET</p>
+                  <p>{t("Phone")}: 1 (888) 444-8866</p>
+
+                  <p>{t("Hours")}: 9:00am-9:45pm</p>
                 </li>
                 <li>
                   <iframe

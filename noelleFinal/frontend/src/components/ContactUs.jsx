@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import "./contactinputs.scss";
+import { useTranslation } from "react-i18next";
 
 //toaster
 // import * as React from 'react';
@@ -15,6 +16,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 //toaster end
 
 export const ContactUs = () => {
+  const { t, i18n } = useTranslation();
+
   //toaster
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
@@ -77,7 +80,7 @@ export const ContactUs = () => {
         <textarea placeholder="message" name="message" />
 
         <button className="send__btn" onClick={handleClick} type="submit">
-          send
+          {t("send")}
         </button>
       </form>
     </div>

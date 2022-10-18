@@ -13,6 +13,7 @@ import { useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useTranslation } from "react-i18next";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -41,6 +42,7 @@ function ProductScreen({ setcount, setrerender }) {
   const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
+  const { t } = useTranslation();
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
@@ -241,20 +243,20 @@ function ProductScreen({ setcount, setrerender }) {
                   onClick={() => addToLocal(product)}
                   className="product__container__row__right__content__counter__button"
                 >
-                  Add to cart
+                  {t("Add to cart")}
                 </button>
               </div>
               <button
                 onClick={() => buyHandler(product)}
                 className="buy__it__now"
               >
-                buy it now
+                {t("Buy now")}
               </button>
             </div>
             {product.countInStock === 0 ? (
-              <span className="availible bg-danger">not available</span>
+              <span className="availible bg-danger">{t("not available")}</span>
             ) : (
-              <span className="availible text-success">available</span>
+              <span className="availible text-success"> {t("available")}</span>
             )}
             <hr />
             <div className="product__container__row__right__content__acc">
@@ -268,7 +270,7 @@ function ProductScreen({ setcount, setrerender }) {
                   id="panel1bh-header"
                 >
                   <Typography sx={{ color: "text.secondary" }}>
-                    Description
+                    {t("Description")}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -285,7 +287,7 @@ function ProductScreen({ setcount, setrerender }) {
                   id="panel2bh-header"
                 >
                   <Typography sx={{ color: "text.secondary" }}>
-                    substance
+                    {t("Substance")}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -302,7 +304,7 @@ function ProductScreen({ setcount, setrerender }) {
                   id="panel3bh-header"
                 >
                   <Typography sx={{ color: "text.secondary" }}>
-                    Instruction
+                    {t("Instruction")}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -313,7 +315,7 @@ function ProductScreen({ setcount, setrerender }) {
             <hr />
             <div className="product__container__row__right__reviews">
               <h2>
-                Costumer reviews:
+                {t("Costumer reviews:")}
                 <Rating rating={average} numReviews={product.comments.length} />
               </h2>
               {product.comments.length > 0 ? (
@@ -329,7 +331,7 @@ function ProductScreen({ setcount, setrerender }) {
                   );
                 })
               ) : (
-                <h2>no reviews</h2>
+                <h2>{t("no reviews")}</h2>
               )}
             </div>
             {userInfo ? (
@@ -376,14 +378,15 @@ function ProductScreen({ setcount, setrerender }) {
                     className="add__comment "
                     onClick={() => commentHandler()}
                   >
-                    add comment
+                    {t("add comment")}
                   </button>
                 </AccordionDetails>
               </Accordion>
             ) : (
               <span>
-                please log in <Link to="/signin">here</Link> for writing a
-                review
+                {t("please log in")}
+                <Link to="/signin"> {t("here")}</Link>{" "}
+                {t("for writing a review")}
               </span>
             )}
           </div>

@@ -2,18 +2,40 @@ import React from "react";
 import "./blog.scss";
 import { Link } from "react-router-dom";
 import { MdOutlineWifi } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const Blog = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <div className="blog">
       <div className="blog__container container">
         <div className="blog__container__title row">
           <h1 className="title__h">
-            The Well-Groomed Blog{" "}
+            {t("The Well-Groomed Blog")}
             <span className="title__span">
               <MdOutlineWifi />
             </span>
           </h1>
+        </div>
+        <div className="blog__container__news row">
+          <div className="blog__container__news__col col-8">
+            <div className="blog__container__news__col__image">
+              <img
+                src="https://c4.wallpaperflare.com/wallpaper/71/854/342/istanbul-galata-tower-bnw-wallpaper-preview.jpg"
+                alt=""
+              />
+            </div>
+            <div className="blog__container__news__col__content">
+              <h2>{t("Our Story from 91")}</h2>
+              <span>{t("may")} 17, 2022</span>
+              <p>
+                {t(
+                  "The Story of Inter Solar Cosmetic in 1991 Inter Marketing Method. Krl. Bshk. Mr. Mustafa Göbeklioğlu started with an invitation by the ministry to an international fair held in Azerbaijan. With the support of Heydar Aliyev and the management concept he brought to Azerbaijan, the country's market was taken under the microscope by Turkish investors. Foundations were laid in 1991. Inter Pazarlama, which has acquired Azerbaijan distributors of many cosmetics and personal care brands from Turkey, Italy and Brazil, has activated the E-Trade channel in Turkey and Azerbaijan in categories such as cosmetics, personal care, accessories, and shoes as of the 2020 Pandemic Period. Inter Cosmetic attaches importance to E-Commerce activities in the Azerbaijan market and continues its work rapidly. With 30 years of commercial experience and sectoral experience in the Azerbaijan market, we provide services to our customers in many categories such as cosmetics, personal care."
+                )}
+              </p>
+            </div>
+          </div>
         </div>
         <div className="blog__container__news row">
           <div className="blog__container__news__col col-8">

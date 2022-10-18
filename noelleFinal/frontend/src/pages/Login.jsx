@@ -8,8 +8,11 @@ import { Helmet } from "react-helmet-async";
 import Axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import { useTranslation } from "react-i18next";
 
 const Login = ({ setuserinfo, userinfo }) => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
@@ -42,12 +45,12 @@ const Login = ({ setuserinfo, userinfo }) => {
   return (
     <div className="auth">
       <Helmet>
-        <title>Sign in</title>
+        <title>{t("Sign in")}</title>
       </Helmet>
       <div className="auth__content">
         <div className="auth__content__main">
           <div className="auth__content__main__header">
-            <h1>Login</h1>
+            <h1>{t("Login")}</h1>
           </div>
           <div className="auth__content__main__inputs">
             <Formik
@@ -88,7 +91,7 @@ const Login = ({ setuserinfo, userinfo }) => {
                     type="submit"
                     disabled={isSubmitting}
                   >
-                    Sign In
+                    {t("SIGN IN")}
                   </button>
                   <button
                     onClick={() => {
@@ -96,7 +99,7 @@ const Login = ({ setuserinfo, userinfo }) => {
                     }}
                     className="create__btn"
                   >
-                    create account
+                    {t("create account")}
                   </button>
                   <button
                     onClick={() => {
@@ -104,7 +107,7 @@ const Login = ({ setuserinfo, userinfo }) => {
                     }}
                     className="create__btn"
                   >
-                    return to store
+                    {t("return to store")}
                   </button>
                 </Form>
               )}

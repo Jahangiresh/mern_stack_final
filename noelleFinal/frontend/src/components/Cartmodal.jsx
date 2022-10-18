@@ -3,13 +3,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { RiShoppingCartLine } from "react-icons/ri";
 import { BsBag } from "react-icons/bs";
 
 import { useState, useEffect } from "react";
 import "./cartmodal.scss";
 import { Link } from "react-router-dom";
-import ip from "./images/logoWHITE.png";
+import { useTranslation } from "react-i18next";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -26,13 +25,13 @@ const style = {
 };
 
 export default function BasicModal({ count, setrerender, rerender }) {
-  // const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [products, setProduct] = useState([]);
-  // const [render, setRender] = useState(true);
 
   let totalPrice = 0;
 
@@ -87,7 +86,7 @@ export default function BasicModal({ count, setrerender, rerender }) {
                       <h2>{p.name}</h2>
                       <p>{p.price}</p>
                       <span onClick={() => removeProductHandler(p._id)}>
-                        remove
+                        {t("remove")}
                       </span>
                       <span className="d-none">{p._id}</span>
                     </div>
@@ -100,7 +99,7 @@ export default function BasicModal({ count, setrerender, rerender }) {
             </div>
             <div className="modal__footer">
               <div className="modal__footer__total ">
-                <span className="subtotal">Subtotal</span>
+                <span className="subtotal">{t("Subtotal")}</span>
                 <span className="total__price">${totalPrice} USD</span>
               </div>
             </div>
@@ -110,7 +109,7 @@ export default function BasicModal({ count, setrerender, rerender }) {
             className="cartmodal__link"
             to="/cartpage"
           >
-            Buy now
+            {t("Buy now")}
           </Link>
         </Box>
       </Modal>

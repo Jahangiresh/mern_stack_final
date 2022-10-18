@@ -1,0 +1,22 @@
+.lang__navs {
+  .dropdown-menu {
+    width: 10px !important;
+    background-color: transparent !important;
+    border: none !important;
+    ul {
+      float: right;
+      font-weight: 900;
+      list-style: disc;
+    }
+  }
+
+  li {
+    cursor: pointer;
+    color: rgb(188, 188, 188) !important;
+  }
+}
+.icon {
+  color: white;
+
+  font-size: 20px;
+}

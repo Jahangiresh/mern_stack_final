@@ -9,6 +9,8 @@ import { getError } from "../utils";
 import Axios from "axios";
 import axios from "axios";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "CREATE_REQUEST":
@@ -23,6 +25,8 @@ const reducer = (state, action) => {
 };
 
 const PlaceOrder = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   //order
@@ -104,32 +108,32 @@ const PlaceOrder = () => {
 
       <div className="cartpage__cover"></div>
       <div className="cartpage__container container">
-        <h1 className="my-5">Place Order</h1>
+        <h1 className="my-5">{t("Place Order")}</h1>
 
         <CheckOutSteps step1 step2 step3 step4></CheckOutSteps>
 
         <div className="cartpage__container__row row">
           <div className="cartpage__container__row__left col-lg-9">
             <div className="cartpage__container__row__left__address">
-              <h6>Delivery</h6>
+              <h6> {t("Delivery")} </h6>
               <p>
-                <span>Name:</span>
+                <span>{t("Name:")}</span>
                 {cart.shipping_address.fullName}
               </p>
               <p>
-                <span>Address:</span>
+                <span>{t("Address:")}</span>
                 {cart.shipping_address.address}
               </p>
             </div>
             <div className="cartpage__container__row__left__payment">
-              <h6>Payment</h6>
+              <h6>{t("Payment")}</h6>
               <p>
-                <span>Method:</span>
+                <span>{t("Method:")}</span>
                 {cart.payment_method}
               </p>
             </div>
             <div className="cartpage__container__row__left__items">
-              <h6>Items</h6>
+              <h6>{t("Items")}</h6>
               {myProducts &&
                 myProducts.map((myProduct) => {
                   return (
@@ -153,7 +157,7 @@ const PlaceOrder = () => {
           </div>
           <div className="cartpage__container__row__right col-lg-3">
             <span className="total__price">
-              Total price: <span>{subtotal} AZN</span>
+              {t("Total price")}: <span>{subtotal} AZN</span>
             </span>
             <hr />
             <button
@@ -161,7 +165,7 @@ const PlaceOrder = () => {
               onClick={placeOrderHandler}
               className="checkout__btn"
             >
-              Place Order
+              {t("Place Order")}
             </button>
 
             <hr />

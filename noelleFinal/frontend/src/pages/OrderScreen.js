@@ -8,6 +8,7 @@ import { getError } from "../utils";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import ListGroup from "react-bootstrap/ListGroup";
+import { useTranslation } from "react-i18next";
 
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -35,6 +36,8 @@ function reducer(state, action) {
 }
 
 const OrderScreen = () => {
+  const { t } = useTranslation();
+
   const params = useParams();
   const { id: orderId } = params;
   const navigate = useNavigate();
@@ -168,16 +171,18 @@ const OrderScreen = () => {
         <title>Order {orderId}</title>
       </Helmet>
       <div className="container">
-        <h1 className="my-3">order {orderId}</h1>
+        <h1 className="my-3">
+          {t("order")} {orderId}
+        </h1>
         <div className="row orderscreen__row">
           <div className="col-8 orderscreen__row__left">
             <div className="card">
               <Card.Body>
-                <h4>Shipping</h4>
-                <strong>Name:</strong>{" "}
+                <h4>{t("Shipping")}</h4>
+                <strong>{t("Name")}:</strong>{" "}
                 <span>{order.shippingAddress.fullName}</span>
                 <br />
-                <strong>Address:</strong>
+                <strong>{t("address")}:</strong>
                 <span>
                   {order.shippingAddress.address},{order.shippingAddress.city},
                   {order.shippingAddress.postalCode},
@@ -195,9 +200,10 @@ const OrderScreen = () => {
 
             <div className="card">
               <Card.Body>
-                <Card.Title>Payment</Card.Title>
+                <Card.Title> {t("Payment")}</Card.Title>
                 <Card.Text>
-                  <strong>Method:</strong> <span>{order.paymentMethod}</span>
+                  <strong>{t("Method")}:</strong>{" "}
+                  <span>{order.paymentMethod}</span>
                 </Card.Text>
                 {order.isPaid ? (
                   <MessageBox variant="success">
@@ -210,7 +216,7 @@ const OrderScreen = () => {
             </div>
             <div className="card">
               <Card.Body>
-                <Card.Title>Items</Card.Title>
+                <Card.Title>{t("Items")}</Card.Title>
                 <ListGroup variant="flush">
                   {order.orderItems.map((item) => {
                     return (
@@ -240,7 +246,7 @@ const OrderScreen = () => {
           <div className="col-4 orderscreen__row__right ">
             <Card className="mb-3">
               <Card.Body>
-                <Card.Title>Order Summary</Card.Title>
+                <Card.Title>{t("Order Summary")}</Card.Title>
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
@@ -250,8 +256,7 @@ const OrderScreen = () => {
                       </Col>
 
                       <Col>
-                        TOTALPRICE:
-                        {order.itemsPrice}
+                        {t("Total price")}:{order.itemsPrice}
                         AZN
                       </Col>
                       {!order.isPaid && (

@@ -7,7 +7,8 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { NavDropdown } from "react-bootstrap";
 import { useState } from "react";
 import { useReducer } from "react";
-
+import { useTranslation } from "react-i18next";
+import HeaderLangs from "./HeaderLangs";
 const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
   let LOCALproducts = JSON.parse(localStorage.getItem("products"));
   const signOutHandler = () => {
@@ -16,14 +17,17 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
     localStorage.removeItem("paymentMethod");
     window.location.href = "/signin";
   };
+  const { t, i18n } = useTranslation();
 
+  function clickLang(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <>
       <div className="header__upper">
         <div className="header__marquee__dom col-6">
           <marquee className="header__upper__p" behavior="" direction="">
-            FREE SHIPPING ON ORDERS OVER $40. PLUS FREE REWARDS EVERY TIME YOU
-            SHOP WHEN YOU JOIN V76 FAN REWARDS.
+            {t("FREE SHIPPING ON ORDERS OVER $40")}
           </marquee>
         </div>
       </div>
@@ -44,24 +48,31 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                   <ul className="header__lower__container__row__center__ul d-lg-flex d-none ">
                     <li>
                       <Link className="navs__link" to="/">
-                        home
+                        {t("HOME")}
                       </Link>
                     </li>
                     <li>
                       <Link className="navs__link" to="/about">
-                        about us
+                        {t("ABOUT US")}
                       </Link>
                     </li>
                     <li>
                       <Link className="navs__link shop__li" to="/shop">
-                        shop
+                        {t("SHOP")}
+
                         <div className="shop__hover">
                           <ul className="shop__hover__ul">
-                            <li className="shop__hover__ul__li">shop all</li>
-                            <li className="shop__hover__ul__li">hair care</li>
-                            <li className="shop__hover__ul__li">face&body</li>
                             <li className="shop__hover__ul__li">
-                              new products
+                              {t("SHOP ALL")}
+                            </li>
+                            <li className="shop__hover__ul__li">
+                              {t("HAİR CARE")}
+                            </li>
+                            <li className="shop__hover__ul__li">
+                              {t("FACE&BODY")}
+                            </li>
+                            <li className="shop__hover__ul__li">
+                              {t("NEW PRODUCTS")}
                             </li>
                           </ul>
                         </div>
@@ -74,16 +85,12 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                     </li>
                     <li>
                       <Link className="navs__link" to="/contact">
-                        contact
+                        {t("CONTACT")}
                       </Link>
                     </li>
                   </ul>
                   <ul className="center__menu  d-lg-none d-flex ">
                     <li className="plus d-lg-none d-block">
-                      {/* <GiHamburgerMenu
-                        className="plusIcon"
-                        onClick={menuSliderHandler}
-                      /> */}
                       <Menuslider />
                     </li>
                   </ul>
@@ -102,7 +109,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                         id="RouterNavLink"
                         to="/profile"
                       >
-                        User Profile
+                        {t("USER PROFILE")}
                       </Link>{" "}
                       <br />
                       <Link
@@ -110,7 +117,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                         id="RouterNavLink"
                         to="/orderhistory"
                       >
-                        Order History
+                        {t("ORDER HISTORY")}
                       </Link>
                       <NavDropdown.Divider />
                       {userinfo && userinfo.data.isAdmin && (
@@ -130,7 +137,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                               id="RouterNavLink"
                               to="/admin/productlist"
                             >
-                              Products
+                              {t("PRODUCTS")}
                             </Link>
                           </li>
                           <li>
@@ -139,7 +146,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                               id="RouterNavLink"
                               to="/admin/orderlist"
                             >
-                              Orders
+                              {t("ORDERS")}
                             </Link>
                           </li>
                           <li>
@@ -148,7 +155,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                               id="RouterNavLink"
                               to="/admin/userlist"
                             >
-                              Users
+                              {t("USERS")}
                             </Link>
                           </li>
                           <li>
@@ -157,7 +164,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                               id="RouterNavLink"
                               to="/admin/employeelist"
                             >
-                              Employees
+                              {t("EMPLOYEES")}
                             </Link>
                           </li>
                         </>
@@ -169,7 +176,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                           onClick={signOutHandler}
                           className="profile__links"
                         >
-                          sign out
+                          {t("SIGN OUT")}
                         </Link>
                       </li>
                     </NavDropdown>
@@ -179,7 +186,7 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                         className="sing__links d-lg-block account__link "
                         to="/signin"
                       >
-                        Account
+                        {t("Account")}
                       </Link>
                     </li>
                   )}
@@ -197,6 +204,9 @@ const Header = ({ count, setCount, setrerender, rerender, userinfo }) => {
                         {LOCALproducts.length}
                       </span>
                     ) : null}
+                  </li>
+                  <li>
+                    <HeaderLangs />
                   </li>
                 </ul>
               </div>

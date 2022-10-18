@@ -18,6 +18,7 @@ import { Helmet } from "react-helmet-async";
 import logger from "use-reducer-logger";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import { useTranslation } from "react-i18next";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -38,6 +39,7 @@ const Main = ({ setcount, setrerender }) => {
     loading: true,
     error: "",
   });
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(
@@ -53,7 +55,6 @@ const Main = ({ setcount, setrerender }) => {
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
-      // setProducts(resp.data);
     };
     getProduct();
   }, []);
@@ -64,9 +65,7 @@ const Main = ({ setcount, setrerender }) => {
     Aos.init({ duration: 1000 });
   }, []);
 
-  //local start
   const addToLocal = (p) => {
-    // navigate(0);
     let products = JSON.parse(localStorage.getItem("products"));
     let _id = p._id;
     let existedProd = products.find((x) => x._id === _id);
@@ -74,7 +73,6 @@ const Main = ({ setcount, setrerender }) => {
     if (!existedProd) {
       products.push(p);
     } else {
-      // products.splice(products.indexOf(existedProd), 1); --delete prod
       existedProd.count++;
     }
     setrerender((value) => !value);
@@ -82,7 +80,6 @@ const Main = ({ setcount, setrerender }) => {
     localStorage.setItem("products", JSON.stringify(products));
   };
 
-  //local end
   var settings = {
     dots: true,
     infinite: true,
@@ -119,14 +116,19 @@ const Main = ({ setcount, setrerender }) => {
           <div className="main__cover__container container">
             <div className="main__cover__container__content">
               <h1>
-                WHAT IT MEANS <br />
-                TO BE WELL-GROOMED
+                {t("WHAT IT MEANS")}
+
+                <br />
+                {t("TO BE WELL-GROOMED")}
               </h1>
               <p>
-                Being well-groomed goes beyond a great cut or great style. Learn
-                how V76 can help.
+                {t(
+                  "Being well-groomed goes beyond a great cut or great style. Learn how we can help"
+                )}
               </p>
-              <button onClick={() => navigate("/contact")}>FIND US</button>
+              <button onClick={() => navigate("/contact")}>
+                {t("FIND US")}
+              </button>
             </div>
           </div>
         </div>
@@ -135,7 +137,7 @@ const Main = ({ setcount, setrerender }) => {
             <div className="main__bestsellers__container__row row">
               <h2>
                 <Link className="bestsellers__link" to="/shop">
-                  best sellers
+                  {t("best sellers")}
                 </Link>
               </h2>
             </div>
@@ -173,13 +175,15 @@ const Main = ({ setcount, setrerender }) => {
                           </div>
 
                           {p.countInStock === 0 ? (
-                            <button className="add__cart">out of stock</button>
+                            <button className="add__cart">
+                              {t("out of stock")}
+                            </button>
                           ) : (
                             <button
                               onClick={() => addToLocal(p)}
                               className="add__cart"
                             >
-                              add to card
+                              {t("Add to cart")}
                             </button>
                           )}
                         </div>
@@ -209,7 +213,7 @@ const Main = ({ setcount, setrerender }) => {
           <div className="main__container__posts row">
             <div className="post__1 col-lg-6 col-md-6 col-12 post">
               <h2 onClick={() => navigate("/blog")}>
-                NATURAL SOLUTIONS.SOFT SKIN
+                {t("NATURAL SOLUTIONS.SOFT SKIN")}
               </h2>
               <img
                 src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
@@ -218,7 +222,7 @@ const Main = ({ setcount, setrerender }) => {
             </div>
             <div className="post__2 col-lg-6 col-md-6 col-12 post">
               <h2 onClick={() => navigate("/about")}>
-                CLASSIC.RELAX & ATTRACT
+                {t("CLASSIC.RELAX & ATTRACT")}
               </h2>
               <img
                 src="https://images.unsplash.com/photo-1599022509786-23794c1b68c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1114&q=80"
@@ -229,14 +233,14 @@ const Main = ({ setcount, setrerender }) => {
         </div>
         <div className="main__join">
           <div className="main__join__content">
-            <h1>JOIN AS A PROFESSIONAL</h1>
+            <h1>{t("JOIN AS A PROFESSIONAL")}</h1>
             {userInfo ? (
               <button onClick={() => navigate("/about")} className="join__btn">
-                ABOUT OUR COMPANY
+                {t("ABOUT OUR COMPANY")}
               </button>
             ) : (
               <button onClick={() => navigate("/signup")} className="join__btn">
-                JOIN NOW
+                {t("JOIN NOW")}
               </button>
             )}
           </div>

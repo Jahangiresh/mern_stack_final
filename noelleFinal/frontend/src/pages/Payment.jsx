@@ -8,7 +8,11 @@ import CheckOutSteps from "../components/CheckOutSteps";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 const Payment = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const [paymentMethodName, setPaymentMethodName] = useState("PayPal");
@@ -28,12 +32,12 @@ const Payment = () => {
   return (
     <div className="adress">
       <Helmet>
-        <title>payment method</title>
+        <title>{t("payment method")}</title>
       </Helmet>
       <div className="adress__cover mb-5"></div>
       <div className="container small-container">
         <CheckOutSteps step1 step2 step3></CheckOutSteps>
-        <h1 className="text-center m-5">Payment Method</h1>
+        <h1 className="text-center m-5">{t("payment method")}</h1>
         <Form onSubmit={submitHandler}>
           <div className="mb-3">
             <Form.Check
@@ -58,7 +62,7 @@ const Payment = () => {
           </div>
           <div className="mb-3 ">
             <Button className="register__btn" type="submit">
-              Continue
+              {t("continue")}
             </Button>
           </div>
         </Form>
